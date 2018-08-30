@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Список Поставщиков
+                Актеры
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -39,7 +39,7 @@
                         @foreach($actors as $actor)
                             <tr>
                                 <td style="padding-left: 15px;">{{ $actor->id }}</td>
-                                <td>{{ $actor->name }}</td>
+                                <td><a href="{{ route('actors.show', $actor->slug)}}">{{ $actor->name }}</a></td>
                                 <td>{{ $actor->image }}</td>
 
                                 <td width="150px">

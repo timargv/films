@@ -18,8 +18,8 @@ class CreateFilmsTable extends Migration
             $table->string('title');
             $table->string('original_title')->nullable();
             $table->string('slogan')->nullable();
-            $table->integer('actor_id');
-            $table->integer('genre_id');
+            // $table->integer('actor_id');
+            // $table->integer('genre_id');
             $table->integer('country_id')->nullable();
             $table->integer('year_id')->nullable();
             $table->integer('director_id')->nullable();
@@ -37,7 +37,10 @@ class CreateFilmsTable extends Migration
             $table->text('video_field')->nullable();
             $table->string('slug');
 
-
+//            актеры            - actor_id
+//            жанры             - genre_id
+//            страна            - country_id
+//            год               - year_id
 //            сценарий          - scenario
 //            продюсер          - producer
 //            оператор          - operator
