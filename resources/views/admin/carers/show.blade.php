@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Актеры
+                {{ $carer->title }}
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -16,12 +16,7 @@
             <div class="box">
 
                 <div class="box-header">
-
-                    <div class="">
-                        <a class="btn btn-primary btn-sm" href="{{ route('actors.create') }}"><i class="fa fa-plus"></i> &nbsp; Добавить</a>
-                    </div>
-
-                    <p></p>
+ 
                 </div>
                 <div class=" box-body table-responsive no-padding">
                     <table class="table table-hover">
@@ -37,13 +32,13 @@
 
                             <th></th>
                         </tr>
-                        @foreach($actors as $actor)
-                            <tr>
+                             @foreach($carer->actors as $actor)
+                              <tr>
                                 <td style="padding-left: 15px;">{{ $actor->id }}</td>
-                                <td>{{ $actor->image }}</td>                                
-                                <td><a href="{{ route('actors.show', $actor->slug)}}">{{ $actor->name }}</a></td>
+                                <td>{{ $actor->image }}</td>
+                                <td><a href="{{ route('carers.show', $actor->slug)}}">{{ $actor->name }}</a></td>
                                 <td>
-                                    @foreach($actor->carers as $carer)
+                                  @foreach($actor->carers as $carer)
                                         @if($carer->title == 'Актер')
                                             <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Режиссер')
@@ -51,36 +46,37 @@
                                         @elseif($carer->title == 'Сценарист')
                                             <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-light-blue">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Продюсер')
-                                            <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
+                                            <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-green">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Оператор')
                                             <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Композитор')
-                                            <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
+                                            <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge ">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Художник')
-                                            <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
+                                            <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-red">{{ $carer->title }}</span></a>
                                         @else
                                             <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-green">{{ $carer->title }}</span></a>
                                         @endif
                                     @endforeach
                                 </td>
 
+
                                 <td width="150px">
-                                    <div class="form-inline">
-                                        <a class="form-inline" href="{{ route('actors.edit', $actor->id) }}">ред.</a>
+                                  <div class="form-inline">
+                                    <a class="form-inline" href="{{ route('carers.edit', $actor->id) }}">ред.</a>
 
-                                        {{ Form::open(['route' => ['actors.destroy', $actor->id], 'method' => 'delete', 'class' => 'form-group']) }}
-                                        <button onclick="return confirm('Удалить?')" class="btn btn-link btn-xs">удалить</button>
-                                        {{ Form::close() }}
-                                    </div>
+                                    {{ Form::open(['route' => ['actors.destroy', $actor->id], 'method' => 'delete', 'class' => 'form-group']) }}
+                                    <button onclick="return confirm('Удалить?')" class="btn btn-link">удалить</button>
+                                    {{ Form::close() }}
+                                  </div>
                                 </td>
-                            </tr>
-                        @endforeach
-
+                              </tr>
+                            @endforeach
+ 
                         </tbody>
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    {{$actors->links()}}
+                    {{-- {{$actors->links()}} --}}
                 </div>
             </div>
         </section>

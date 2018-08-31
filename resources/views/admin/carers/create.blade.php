@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Список Контактов
+                Добавить Профессию
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -19,7 +19,8 @@
                 <div class="box-header">
 
                 </div>
-                {{ Form::open(['route' => ['actors.update', $actor->id], 'method' => 'put']) }}
+                {{ Form::open(['route' => 'carers.store']) }}
+
                 <div class=" box-body ">
 
                     <div class="">
@@ -29,22 +30,10 @@
                             @include('admin.errors')
                             <div class="clearfix row">
                                 <div class="col-xs-6">
-                                    <label>Имя</label>
+                                    <label>Профессия</label>
                                     <div class="input-group ">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $actor->name }}"></div>
-                                </div>
-                                <div class="col-xs-6">                                
-                                    <div class="form-group">
-                                      <label>Профессии</label>
-                                      {{Form::select('carers[]', 
-                                        $carers, 
-                                        $selectedCarers, 
-                                        ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Профессии'])
-                                      }}
-                                      
-                                    </div>
-                                    
+                                        <input name="title" type="text" class="form-control" placeholder="Профессия"></div>
                                 </div>
                             </div>
 
@@ -55,7 +44,7 @@
 
                 </div>
                 <div class="box-footer clearfix">
-                    <a href="{{ URL::previous() }} " class="btn btn-default">Закрыть</a>
+                    <button  class="btn btn-default" data-dismiss="modal">Закрыть</button>
                     <button  class="btn btn-primary">Сохранить</button>
                 </div>
                 {{ Form::close() }}

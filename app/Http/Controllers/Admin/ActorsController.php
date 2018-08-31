@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Actor;
+use App\Carer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +19,8 @@ class ActorsController extends Controller
 
     public function create()
     {
-        return view('admin.actors.create');
+        $carers = Carer::pluck('title', 'id')->all();
+        return view('admin.actors.create', compact('carers'));
     }
 
 
@@ -27,7 +29,8 @@ class ActorsController extends Controller
         $this->validate($request, [
             'name' => 'required'
         ]);
-        Actor::create($request->all());
+        $actor = Actor::add($request->all());
+        $actor->setCarers($request()->get('carers'));
         return redirect(route('actors.index'));
     }
 
@@ -42,7 +45,10 @@ class ActorsController extends Controller
     public function edit($id)
     {
         $actor = Actor::find($id);
-        return view('admin.actors.edit', compact('actor'));
+        $carers = Carer::pluck('title', 'id');
+        $selectedCarers = $actor->carers->pluck('id')->all();
+
+        return view('admin.actors.edit', compact('actor', 'carers', 'selectedCarers'));
     }
 
 
@@ -53,8 +59,9 @@ class ActorsController extends Controller
         ]);
 
         $actor = Actor::find($id);
-        $actor->update($request->all());
-
+        $actor->edit($request->all());
+        $actor->setCarers($request->get('carers'));
+        
         return redirect()->route('actors.index');
     }
 

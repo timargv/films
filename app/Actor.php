@@ -18,12 +18,26 @@ class Actor extends Model
 
     protected $fillable = ['name', 'slug'];
 
+
+    //-------------------
     public function films () {
         return $this->belongsToMany(
             Film::class,
             'film_actors',
             'actor_id',
             'film_id'
+        );
+    }
+
+
+    //-------------------
+    public function carers()
+    {
+        return $this->belongsToMany(
+            Carer::class,
+            'actor_carers',
+            'actor_id',
+            'carer_id'
         );
     }
 
@@ -36,4 +50,47 @@ class Actor extends Model
             ]
         ];
     }
+
+
+    //-------------------
+    public static function add($fields)
+    {
+        $actor = new static;
+        $actor->fill($fields);
+        $actor->save();
+
+        return $actor;
+    }
+
+    //-------------------
+    public function edit($fields)
+    {
+        $this->fill($fields);
+        $this->save();
+    }
+
+    //-------------------
+    public function remove()
+    {
+        $this->delete();
+    }
+
+
+    //--- Получение и Добавление Профессии ---//
+    //---------------------------------------//
+    public function setCarers($ids)
+    {
+        if ($ids === null) { return; }
+        $this->carers()->sync($ids);
+    }    
+
+
+    //-------------------
+    public function getCarersTitles()
+    {
+        return (!$this->carers->isEmpty())
+            ?   implode(', ', $this->carers->pluck('title')->all())
+            :   'Нет Профессии';
+    }
+ 
 }

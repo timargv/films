@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Список Контактов
+                Редактировать Жанр
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -19,7 +19,7 @@
                 <div class="box-header">
 
                 </div>
-                {{ Form::open(['route' => ['actors.update', $actor->id], 'method' => 'put']) }}
+                {{ Form::open(['route' => ['genres.update', $genre->id], 'method' => 'put']) }}
                 <div class=" box-body ">
 
                     <div class="">
@@ -32,20 +32,10 @@
                                     <label>Имя</label>
                                     <div class="input-group ">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $actor->name }}"></div>
+                                        <input name="title" type="text" class="form-control" placeholder="Иван" value="{{ $genre->title }}"></div>
                                 </div>
-                                <div class="col-xs-6">                                
-                                    <div class="form-group">
-                                      <label>Профессии</label>
-                                      {{Form::select('carers[]', 
-                                        $carers, 
-                                        $selectedCarers, 
-                                        ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Профессии'])
-                                      }}
-                                      
-                                    </div>
-                                    
-                                </div>
+
+                                
                             </div>
 
                             <br>
