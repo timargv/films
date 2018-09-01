@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actor;
+use App\Film;
 use App\Genre;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class GenresController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $genres = Genre::paginate(15);
+        $genres = Genre::all();
+//        $count = $genres->film->pluck('id')->all();
         return view('admin.genres.index', compact('genres'));
     }
 
@@ -55,8 +54,12 @@ class GenresController extends Controller
     public function show($slug)
     {
         $genre = Genre::where('slug', $slug)->firstOrFail();
-        return view('admin.genres.show', compact('genre'));
+        $films = $genre->films()->get();
 
+        $film = Film::where('id', $genre->id)->firstOrFail();
+        $actors = $film->actors()->get();
+
+        return view('admin.genres.show', compact('genre', 'films', 'actors'));
     }
 
     /**

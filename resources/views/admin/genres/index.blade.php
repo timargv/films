@@ -38,7 +38,15 @@
                         @foreach($genres as $genre)
                             <tr>
                                 <td style="padding-left: 15px;">{{ $genre->id }}</td>
-                                <td><a href="{{ route('genres.show', $genre->slug)}}">{{ $genre->title }}</a></td>
+                                <td><a href="{{ route('genres.show', $genre->slug)}}">
+                                        <span>{{ $genre->title }}</span>
+                                        <span class="pull-right-container">
+                                          <small class="label bg-green">{{ count($genre->films) }}</small>
+                                        </span>
+                                    </a>
+
+
+                                </td>
 
                                 <td width="150px">
                                     <div class="form-inline">
@@ -56,7 +64,7 @@
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    {{$genres->links()}}
+{{--                    {{$genres->links()}}--}}
                 </div>
             </div>
         </section>

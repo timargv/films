@@ -7,86 +7,17 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {{ $genre->title }}
-                <small>приятные слова..</small>
+                {{ $genre->title }} <span class="label label-info">{{ count($genre->films) }}</span>
+                <small></small>
             </h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-3">
 
-                    <!-- Profile Image -->
-                    <div class="box box-primary">
-                        <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture">
-
-                            <h3 class="profile-username text-center">{{ $genre->title }}</h3>
-
-                            <p class="text-muted text-center">Software Engineer</p>
-
-                            <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
-                                    <b>Followers</b> <a class="pull-right">1,322</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Following</b> <a class="pull-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Friends</b> <a class="pull-right">13,287</a>
-                                </li>
-                            </ul>
-
-                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-                            <p class="text-muted">
-                                B.S. in Computer Science from the University of Tennessee at Knoxville
-                            </p>
-
-                            <hr>
-
-                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                            <p class="text-muted">Malibu, California</p>
-
-                            <hr>
-
-                            <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                            <p>
-                                <span class="label label-danger">UI Design</span>
-                                <span class="label label-success">Coding</span>
-                                <span class="label label-info">Javascript</span>
-                                <span class="label label-warning">PHP</span>
-                                <span class="label label-primary">Node.js</span>
-                            </p>
-
-                            <hr>
-
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
                 <!-- /.col -->
-                <div class="col-md-9">
+                <div class="col-md-12">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Фильмы</a></li>
@@ -96,13 +27,37 @@
                         <div class="tab-content">
                             <div class="active tab-pane" id="activity">
                                 <div class=" clearfix">
-                                    @foreach($genre->films as $film)
-                                        <div class="box-body box-profile col-xs-2">
+                                    @foreach($films as $film)
+                                        <div class="box-body box-profile col-xs-6 col-md-2">
                                             <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="../../img/iphone.jpg" alt="User profile picture"></a>
 
                                             <h3 class="profile-username text-left">{{ $film->title }}</h3>
+                                           @foreach($actors as $actor)
+                                               @foreach($actor->carers as $carer)
+                                                   @if ($carer->id == '1')
+                                                        {{ $actor->name }} - {{ $carer->title }}
+                                                   @elseif($carer->id == '2')
+                                                        {{ $actor->name }} - {{ $carer->title }}
 
-                                            <p class="text-muted text-left">Software Engineer</p>
+                                                    @elseif($carer->id == '3')
+                                                        {{ $actor->name }} - {{ $carer->title }}
+
+                                                    @elseif($carer->id == '4')
+                                                        {{ $actor->name }} - {{ $carer->title }}
+
+                                                    @elseif($carer->id == '5')
+                                                        {{ $actor->name }} - {{ $carer->title }}
+
+                                                    @elseif($carer->id == '6')
+                                                        {{ $actor->name }} - {{ $carer->title }}
+
+                                                    @elseif($carer->id == '7')
+                                                        {{ $actor->name }} - {{ $carer->title }}
+
+                                                    @endif
+
+                                               @endforeach
+                                           @endforeach
                                         </div>
                                     @endforeach
                                 </div>

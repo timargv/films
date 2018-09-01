@@ -29,4 +29,9 @@ class Genre extends Model
             ]
         ];
     }
+
+    //-------------------
+    public function countFilms($slug) {
+
+    }
 }

@@ -41,8 +41,71 @@
                                 <td style="padding-left: 15px;">{{ $film->id }}</td>
                                 <td><a href="{{ route('films.show', $film->slug)}}">{{ $film->title }}</a></td>
                                 <td>
+
                                     @foreach($film->genres as $genre)
-                                        <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @if($genre->id == 1)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 2)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-blue">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 3)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-yellow">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 4)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-green">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 5)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 6)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-blue">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 7)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-yellow">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 8)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-green">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 9)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 10)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-blue">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 11)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-yellow">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 12)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-green">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 13)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 14)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-blue">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 15)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-yellow">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 16)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-green">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 17)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 18)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 19)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 20)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 21)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 22)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 23)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 24)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 25)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 26)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 27)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 28)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 29)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 30)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @elseif($genre->id == 31)
+                                            <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-red">{{ $genre->title }}</span></a>
+                                        @endif
                                     @endforeach
                                 </td>
 

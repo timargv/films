@@ -94,177 +94,233 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">Актеры</a></li>
-                            <li><a href="#timeline" data-toggle="tab">Сериалы</a></li>
-                            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            @php($i=0)
+                            @foreach($actors as $actor)
+                                @foreach($actor->carers as $carer)
+                                    @if ($carer->id == '1')
+                                        <li><a href="#timeline1" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '2')
+                                        <li><a href="#timeline2" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '3')
+                                        <li><a href="#timeline3" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '4')
+                                        <li><a href="#timeline4" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '5')
+                                        <li><a href="#timeline5" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '6')
+                                        <li><a href="#timeline6" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '7')
+                                        <li><a href="#timeline7" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @elseif ($carer->id == '8')
+                                        <li><a href="#timeline8" data-toggle="tab">{{ $carer->title }}</a></li>
+                                    @endif
+                                @endforeach
+                            @endforeach
+
                         </ul>
                         <div class="tab-content">
-                            <div class="active tab-pane" id="activity">
+                            <div class="active tab-pane" id="timeline1 activity">
                                 <p></p>
                                 <div class="clearfix">
-                                    @foreach($film->actors as $actor)
-                                        <div class="box-body box-profile pull-left">
-                                            <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                    @foreach($actors as $actor)
 
-                                            <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '1')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
 
-                                            <p class="text-muted text-center">Software Engineer</p>
-                                        </div>
+                                                    <h3 class="profile-username text-center">{{ $actor->name, $actor->id }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
                                     @endforeach
+
                                 </div>
 
                             </div>
                             <!-- /.tab-pane -->
-                            <div class="tab-pane" id="timeline">
+
+                            <div class="tab-pane" id="timeline2">
                                 <!-- The timeline -->
-                                <ul class="timeline timeline-inverse">
-                                    <!-- timeline time label -->
-                                    <li class="time-label">
-                                <span class="bg-red">
-                                  10 Feb. 2014
-                                </span>
-                                    </li>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    <li>
-                                        <i class="fa fa-envelope bg-blue"></i>
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
 
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '2')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
 
-                                            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                            <div class="timeline-body">
-                                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                                quora plaxo ideeli hulu weebly balihoo...
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a class="btn btn-primary btn-xs">Read more</a>
-                                                <a class="btn btn-danger btn-xs">Delete</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <!-- END timeline item -->
-                                    <!-- timeline item -->
-                                    <li>
-                                        <i class="fa fa-user bg-aqua"></i>
+                                    @endforeach
 
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                                            <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
-                                            </h3>
-                                        </div>
-                                    </li>
-                                    <!-- END timeline item -->
-                                    <!-- timeline item -->
-                                    <li>
-                                        <i class="fa fa-comments bg-yellow"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                                            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                            <div class="timeline-body">
-                                                Take me to your leader!
-                                                Switzerland is small and neutral!
-                                                We are more like Germany, ambitious and misunderstood!
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a class="btn btn-warning btn-flat btn-xs">View comment</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <!-- END timeline item -->
-                                    <!-- timeline time label -->
-                                    <li class="time-label">
-                                <span class="bg-green">
-                                  3 Jan. 2014
-                                </span>
-                                    </li>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    <li>
-                                        <i class="fa fa-camera bg-purple"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                                            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                            <div class="timeline-body">
-                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                                <img src="http://placehold.it/150x100" alt="..." class="margin">
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <!-- END timeline item -->
-                                    <li>
-                                        <i class="fa fa-clock-o bg-gray"></i>
-                                    </li>
-                                </ul>
+                                </div>
                             </div>
                             <!-- /.tab-pane -->
 
-                            <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <div class="tab-pane" id="timeline3">
+                                <!-- The timeline -->
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
 
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '3')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
 
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
 
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                                    @endforeach
 
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                             <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="timeline4">
+                                <!-- The timeline -->
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
+
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '4')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="timeline5">
+                                <!-- The timeline -->
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
+
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '5')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="timeline6">
+                                <!-- The timeline -->
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
+
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == 6)
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="timeline7">
+                                <!-- The timeline -->
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
+
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '7')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="timeline8">
+                                <!-- The timeline -->
+                                <p></p>
+
+                                <div class="clearfix">
+                                    @foreach($actors as $actor)
+
+                                        @foreach($actor->carers as $carer)
+                                            @if ($carer->id == '8')
+                                                <div class="box-body box-profile pull-left">
+                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+
+                                                    <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                                                    <p class="text-muted text-center">
+                                                        {{ $carer->title }}
+                                                    </p>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                    @endforeach
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+
                         </div>
                         <!-- /.tab-content -->
                     </div>

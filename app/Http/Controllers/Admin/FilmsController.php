@@ -61,8 +61,12 @@ class FilmsController extends Controller
      */
     public function show($slug)
     {
+        /**/
         $film = Film::where('slug', $slug)->firstOrFail();
-        return view('admin.films.show', compact('film'));
+        $actors = $film->actors()->get();
+        $genres = $film->genres()->get();
+
+        return view('admin.films.show', compact('film', 'actors', 'genres'));
     }
 
     /**
