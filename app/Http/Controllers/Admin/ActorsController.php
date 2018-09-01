@@ -30,7 +30,7 @@ class ActorsController extends Controller
             'name' => 'required'
         ]);
         $actor = Actor::add($request->all());
-        $actor->setCarers($request()->get('carers'));
+        $actor->setCarers($request->get('carers'));
         return redirect(route('actors.index'));
     }
 

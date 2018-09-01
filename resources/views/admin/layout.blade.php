@@ -429,14 +429,7 @@
 
 
 <script src="/js/admin.js"></script>
-<script>
-    $(document).ready(function(){
-        var editor = CKEDITOR.replaceAll();
-        CKFinder.setupCKEditor( editor );
-        $('#example1').inputmask('(99) 9999[9]-9999');
-    });
 
-</script>
   
 </body>
 

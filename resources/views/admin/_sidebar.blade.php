@@ -14,6 +14,7 @@
           <i class="fa fa-angle-left pull-right"></i>
         </span>
       </a>
+
       <ul class="treeview-menu">
         <li class="{{{ (Request::is('admin/films*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('films.index') }}"><i class="fa fa-play"></i> <span>Фильмы</span></a></li>
         <li><a href="#"><i class="fa fa-play"></i> <span>Сериалы</span></a></li>
@@ -26,8 +27,6 @@
         <li><a href="#"><i class="fa fa-comment-o"></i> <span>Рецензии</span></a></li>
         <li><a href="#"><i class="fa fa-comments"></i> <span>Комменты</span></a></li>
         <li><a href="#"><i class="fa fa-comment"></i> <span>Отзывы</span></a></li>
-       
-
 
       </ul>
     </li>

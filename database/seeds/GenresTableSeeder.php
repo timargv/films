@@ -13,6 +13,5 @@ class GenresTableSeeder extends Seeder
     {
         //
         factory(\App\Genre::class, 50)->create();
-
     }
 }
