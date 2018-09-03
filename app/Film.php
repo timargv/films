@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $actors
  * @property mixed $genres
  * @property mixed $directors
+ * @property mixed $writers
  */
 class Film extends Model
 {
@@ -62,7 +63,14 @@ class Film extends Model
             'director_id'
         );
     }
-
+    public function writers() {
+        return $this->belongsToMany(
+            Director::class,
+            'film_actors',
+            'film_id',
+            'writer_id'
+        );
+    }
     public function genres()
     {
         return $this->belongsToMany(

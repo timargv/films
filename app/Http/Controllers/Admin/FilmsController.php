@@ -79,6 +79,7 @@ class FilmsController extends Controller
 
         $actors = $film->actors()->get();
         $directors = $film->directors()->get();
+        $directors = $film->writers()->get();
         $genres = $film->genres()->get();
 
         return view('admin.films.show', compact('film', 'actors', 'genres', 'directors'));
