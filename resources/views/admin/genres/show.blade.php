@@ -33,29 +33,7 @@
 
                                             <h3 class="profile-username text-left">{{ $film->title }}</h3>
                                            @foreach($actors as $actor)
-                                               @foreach($actor->carers as $carer)
-                                                   @if ($carer->id == '1')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-                                                   @elseif($carer->id == '2')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-
-                                                    @elseif($carer->id == '3')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-
-                                                    @elseif($carer->id == '4')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-
-                                                    @elseif($carer->id == '5')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-
-                                                    @elseif($carer->id == '6')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-
-                                                    @elseif($carer->id == '7')
-                                                        {{ $actor->name }} - {{ $carer->title }}
-
-                                                    @endif
-
+                                                        {{ $actor->name }} - {{$carerActor}}
                                                @endforeach
                                            @endforeach
                                         </div>

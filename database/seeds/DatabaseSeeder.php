@@ -39,7 +39,15 @@ class DatabaseSeeder extends Seeder
                 ['film_id' => $i, 'actor_id' => rand(1, 3)],
                 ['film_id' => $i, 'actor_id' => rand(4, 10)],
                 ['film_id' => $i, 'actor_id' => rand(11, 20)],
+                ['film_id' => $i, 'actor_id' => rand(11, 20)],
+
+                ['film_id' => $i, 'actor_id' => rand(20, 25)],
+                ['film_id' => $i, 'actor_id' => rand(26, 30)],
+                ['film_id' => $i, 'actor_id' => rand(31, 35)],
+                ['film_id' => $i, 'actor_id' => rand(36, 40)],
             ]);
         }
+
+
     }
 }

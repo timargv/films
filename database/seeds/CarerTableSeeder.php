@@ -1,5 +1,6 @@
 <?php
 
+use App\Carer;
 use Illuminate\Database\Seeder;
 
 class CarerTableSeeder extends Seeder
@@ -14,13 +15,13 @@ class CarerTableSeeder extends Seeder
         //
         // factory(\App\Carer::class, 7)->create();
 
-        \App\Carer::create(['title' => 'Актер']);
-        \App\Carer::create(['title' => 'Режиссер']);
-        \App\Carer::create(['title' => 'Сценарист']);
-        \App\Carer::create(['title' => 'Продюсер']);
-        \App\Carer::create(['title' => 'Оператор']);
-        \App\Carer::create(['title' => 'Композитор']);
-        \App\Carer::create(['title' => 'Художник']);
-        \App\Carer::create(['title' => 'Монтажер']);
+        Carer::create(['title' => 'Актер']);
+        Carer::create(['title' => 'Режиссер']);
+        Carer::create(['title' => 'Сценарист']);
+        Carer::create(['title' => 'Продюсер']);
+        Carer::create(['title' => 'Оператор']);
+        Carer::create(['title' => 'Композитор']);
+        Carer::create(['title' => 'Художник']);
+        Carer::create(['title' => 'Монтажер']);
     }
 }

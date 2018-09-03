@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property mixed $actors
  * @property mixed $genres
+ * @property mixed $directors
  */
 class Film extends Model
 {
@@ -51,6 +52,14 @@ class Film extends Model
             'film_actors',
             'film_id',
             'actor_id'
+        );
+    }
+    public function directors() {
+        return $this->belongsToMany(
+            Director::class,
+            'film_actors',
+            'film_id',
+            'director_id'
         );
     }
 
@@ -112,6 +121,13 @@ class Film extends Model
     {
         if ($ids === null) { return; }
         $this->actors()->sync($ids);
+    }
+
+    //-------------------
+    public function setDirectors($ids)
+    {
+        if ($ids === null) { return; }
+        $this->directors()->sync($ids);
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Director;
 use App\Film;
 use App\Genre;
 use App\Actor;
@@ -30,7 +31,8 @@ class FilmsController extends Controller
     {
         $genres = Genre::pluck('title', 'id')->all();
         $actors = Actor::pluck('name', 'id')->all();
-        return view('admin.films.create', compact('genres', 'actors'));
+        $directors = Actor::pluck('name', 'id')->all();
+        return view('admin.films.create', compact('genres', 'actors', 'directors'));
     }
 
     /**
@@ -49,6 +51,7 @@ class FilmsController extends Controller
         $film = Film::add($request->all());
         $film->setGenres($request->get('genres'));
         $film->setActors($request->get('actors'));
+        $film->setDirectors($request->get('directors'));
 
         return redirect()->route('films.index');
     }
@@ -63,10 +66,22 @@ class FilmsController extends Controller
     {
         /**/
         $film = Film::where('slug', $slug)->firstOrFail();
+        $actor = Actor::where('id', $film->id)->firstOrFail();
+
+//        $actors = 'Актер';
+//        $actors = 'Режиссер';
+//        $actors = 'Сценарист';
+//        $actors = 'Продюсер';
+//        $actors = 'Оператор';
+//        $actors = 'Композитор';
+//        $actors = 'Художник';
+//        $actors = 'Монтажер';
+
         $actors = $film->actors()->get();
+        $directors = $film->directors()->get();
         $genres = $film->genres()->get();
 
-        return view('admin.films.show', compact('film', 'actors', 'genres'));
+        return view('admin.films.show', compact('film', 'actors', 'genres', 'directors'));
     }
 
     /**
@@ -80,11 +95,14 @@ class FilmsController extends Controller
         $film = Film::find($id);
         $actors = Actor::pluck('name', 'id')->all();
         $genres = Genre::pluck('title', 'id')->all();
+        $directors = Director::pluck('name', 'id')->all();
+
 
         $selectedActors = $film->actors->pluck('id')->all();
         $selectedGenres = $film->genres->pluck('id')->all();
+        $selectedDirectors = $film->directors->pluck('id')->all();
 
-        return view('admin.films.edit', compact('film', 'actors', 'genres', 'selectedActors', 'selectedGenres'));
+        return view('admin.films.edit', compact('film', 'actors', 'genres', 'directors', 'selectedActors', 'selectedGenres', 'selectedDirectors'));
     }
 
     /**
@@ -104,6 +122,7 @@ class FilmsController extends Controller
         $film->edit($request->all());
         $film->setActors($request->get('actors'));
         $film->setGenres($request->get('genres'));
+        $film->setDirectors($request->get('directors'));
 
         return redirect()->route('films.index');
     }

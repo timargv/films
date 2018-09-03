@@ -115,7 +115,7 @@
                                         <a class="form-inline" href="{{ route('films.edit', $film->id) }}">ред.</a>
 
                                         {{ Form::open(['route' => ['films.destroy', $film->id], 'method' => 'delete', 'class' => 'form-group']) }}
-                                        <button onclick="return confirm('Удалить?')" class="btn btn-link">удалить</button>
+                                        <button onclick="return confirm('Удалить?')" class="btn btn-link btn-xs">удалить</button>
                                         {{ Form::close() }}
                                     </div>
                                 </td>

@@ -52,6 +52,14 @@
                                         ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
                                       }}
                                     </div>
+                                    <div class="form-group">
+                                        <label>Режиссер</label>
+                                        {{Form::select('directors[]',
+                                          $directors,
+                                          $selectedDirectors,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
+                                        }}
+                                    </div>
                                 </div>
                             </div>
 
