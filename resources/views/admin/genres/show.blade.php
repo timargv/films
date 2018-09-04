@@ -32,8 +32,12 @@
                                             <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="../../img/iphone.jpg" alt="User profile picture"></a>
 
                                             <h3 class="profile-username text-left">{{ $film->title }}</h3>
-                                           @foreach($actors as $actor)
-                                                        {{ $actor->name }}
+                                           @foreach($film->actors as $actor)
+                                                <a href="{{ route('actors.show', $actor->slug) }}">{{ $actor->name }}</a>,
+                                           @endforeach
+                                            <hr>
+                                           @foreach($film->directors as $director)
+                                                {{ $director->name }},
                                            @endforeach
                                         </div>
                                     @endforeach
