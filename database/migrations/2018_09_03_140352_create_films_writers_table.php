@@ -13,9 +13,11 @@ class CreateFilmsWritersTable extends Migration
      */
     public function up()
     {
-        Schema::create('films_writers', function (Blueprint $table) {
+        Schema::create('film_writers', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('film_id');
+            $table->integer('writer_id');
+//            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateFilmsWritersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('films_writers');
+        Schema::dropIfExists('film_writers');
     }
 }

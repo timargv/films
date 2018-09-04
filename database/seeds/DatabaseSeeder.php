@@ -16,8 +16,10 @@ class DatabaseSeeder extends Seeder
          $this->call(GenresTableSeeder::class);
          $this->call(CarerTableSeeder::class);
          $this->call(FilmTableSeeder::class);
+         $this->call(CountryTableSeeder::class);
+         $this->call(YearTableSeeder::class);
 
-         for ($i = 0; $i < 11; $i++) {
+         for ($i = 1; $i < 11; $i++) {
              DB::table('actor_carers')->insert([
                  ['actor_id' => $i, 'carer_id' => rand(1, 2)],
                  ['actor_id' => $i, 'carer_id' => rand(3, 4)],
@@ -26,7 +28,7 @@ class DatabaseSeeder extends Seeder
              ]);
          }
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 1; $i < 50; $i++) {
             DB::table('film_genres')->insert([
                 ['film_id' => $i, 'genre_id' => rand(1, 31)],
                 ['film_id' => $i, 'genre_id' => rand(1, 31)],
@@ -34,7 +36,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 1; $i < 50; $i++) {
             DB::table('film_actors')->insert([
                 ['film_id' => $i, 'actor_id' => rand(1, 3)],
                 ['film_id' => $i, 'actor_id' => rand(4, 10)],

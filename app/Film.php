@@ -13,6 +13,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $genres
  * @property mixed $directors
  * @property mixed $writers
+ * @property mixed $artists
+ * @property mixed $countries
+ * @property mixed $mountings
+ * @property mixed $musicians
+ * @property mixed $years
+ * @property mixed $operators
  */
 class Film extends Model
 {
@@ -45,6 +51,12 @@ class Film extends Model
 
     // protected $guarded = ['id'];
 
+    public function allAct ($actrs) {
+        $lists = Actor::pluck('name', 'id')->all();
+        return $lists;
+    }
+
+
     //-------------------
     public function actors()
     {
@@ -58,7 +70,7 @@ class Film extends Model
     public function directors() {
         return $this->belongsToMany(
             Director::class,
-            'film_actors',
+            'film_directors',
             'film_id',
             'director_id'
         );
@@ -66,7 +78,7 @@ class Film extends Model
     public function writers() {
         return $this->belongsToMany(
             Director::class,
-            'film_actors',
+            'film_writers',
             'film_id',
             'writer_id'
         );
@@ -78,6 +90,55 @@ class Film extends Model
             'film_genres',
             'film_id',
             'genre_id'
+        );
+    }
+    public function artists () {
+        return $this->belongsToMany(
+            Artist::class,
+            'film_artists',
+            'film_id',
+            'artist_id'
+        );
+    }
+    public function countries () {
+        return $this->belongsToMany(
+            Country::class,
+            'film_countries',
+            'film_id',
+            'country_id'
+        );
+    }
+    public function mountings () {
+        return $this->belongsToMany(
+            Mounting::class,
+            'film_mountings',
+            'film_id',
+            'mounting_id'
+        );
+    }
+    public function musicians () {
+        return $this->belongsToMany(
+            Musician::class,
+            'film_musicians',
+            'film_id',
+            'musician_id'
+
+        );
+    }
+    public function operators () {
+        return $this->belongsToMany(
+            Operator::class,
+            'film_operators',
+            'film_id',
+            'operator_id'
+        );
+    }
+    public function years () {
+        return $this->belongsToMany(
+            Year::class,
+            'film_years',
+            'film_id',
+            'year_id'
         );
     }
 
@@ -137,6 +198,56 @@ class Film extends Model
         if ($ids === null) { return; }
         $this->directors()->sync($ids);
     }
+
+    //-------------------
+    public function setWriters($ids)
+    {
+        if ($ids === null) { return; }
+        $this->writers()->sync($ids);
+    }
+
+    //-------------------
+    public function setArtists($ids)
+    {
+        if ($ids === null) { return; }
+        $this->artists()->sync($ids);
+    }
+
+    //-------------------
+    public function setCountries($ids)
+    {
+        if ($ids === null) { return; }
+        $this->countries()->sync($ids);
+    }
+
+    //-------------------
+    public function setMountings($ids)
+    {
+        if ($ids === null) { return; }
+        $this->mountings()->sync($ids);
+    }
+
+    //-------------------
+    public function setMusicians($ids)
+    {
+        if ($ids === null) { return; }
+        $this->musicians()->sync($ids);
+    }
+
+    //-------------------
+    public function setOperators($ids)
+    {
+        if ($ids === null) { return; }
+        $this->operators()->sync($ids);
+    }
+
+    //-------------------
+    public function setYears($ids)
+    {
+        if ($ids === null) { return; }
+        $this->years()->sync($ids);
+    }
+
 
 
     //-------------------

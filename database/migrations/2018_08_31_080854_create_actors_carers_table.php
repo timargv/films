@@ -17,7 +17,7 @@ class CreateActorsCarersTable extends Migration
             $table->increments('id');
             $table->integer('actor_id');
             $table->integer('carer_id');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

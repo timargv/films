@@ -12,6 +12,8 @@
             </h1>
         </section>
 
+
+
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -30,7 +32,7 @@
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item clearfix">
                                     <b>Жанры</b>
-                                    @foreach($film->genres as $genre)
+                                    @foreach($genres as $genre)
                                         <a class="pull-right" href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-yellow">{{ $genre->title }}</span></a>
                                     @endforeach
 
@@ -97,6 +99,11 @@
 
                             <li class="active"><a href="#timeline1" data-toggle="tab">Актеры</a></li>
                             <li class=""><a href="#timeline2" data-toggle="tab">Режиссеры</a></li>
+                            <li class=""><a href="#timeline3" data-toggle="tab">Сценарист</a></li>
+                            <li class=""><a href="#timeline4" data-toggle="tab">Оператор</a></li>
+                            <li class=""><a href="#timeline5" data-toggle="tab">Композитор</a></li>
+                            <li class=""><a href="#timeline6" data-toggle="tab">Художник</a></li>
+                            <li class=""><a href="#timeline7" data-toggle="tab">Монтаж</a></li>
 
                         </ul>
                         <div class="tab-content">
@@ -104,16 +111,11 @@
                                 <p></p>
                                 <div class="clearfix">
                                     @foreach($actors as $actor)
-
-                                                <div class="box-body box-profile pull-left">
-                                                    <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
-
-                                                    <h3 class="profile-username text-center">{{ $actor->name, $actor->id }}</h3>
-
-                                                </div>
-
+                                        <div class="box-body box-profile pull-left">
+                                            <a href="{{ route('actors.show', $actor->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-center">{{ $actor->name, $actor->id }}</h3>
+                                        </div>
                                     @endforeach
-
                                 </div>
 
                             </div>
@@ -123,18 +125,77 @@
                                 <p></p>
                                 <div class="clearfix">
                                     @foreach($directors as $director)
-
                                         <div class="box-body box-profile pull-left">
                                             <a href="{{ route('actors.show', $director->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
-
                                             <h3 class="profile-username text-center">{{ $director->name, $director->id }}</h3>
-
                                         </div>
-
                                     @endforeach
-
                                 </div>
+                            </div>
+                            <!-- /.tab-pane -->
 
+                            <div class=" tab-pane" id="timeline3">
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($writers as $writer)
+                                        <div class="box-body box-profile pull-left">
+                                            <a href="{{ route('actors.show', $writer->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-center">{{ $writer->name, $writer->id }}</h3>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class=" tab-pane" id="timeline4">
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($operators as $operator)
+                                        <div class="box-body box-profile pull-left">
+                                            <a href="{{ route('actors.show', $operator->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-center">{{ $operator->name, $operator->id }}</h3>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class=" tab-pane" id="timeline5">
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($musicians as $musician)
+                                        <div class="box-body box-profile pull-left">
+                                            <a href="{{ route('actors.show', $musician->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-center">{{ $musician->name, $musician->id }}</h3>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class=" tab-pane" id="timeline6">
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($artists as $artist)
+                                        <div class="box-body box-profile pull-left">
+                                            <a href="{{ route('actors.show', $artist->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-center">{{ $artist->name, $artist->id }}</h3>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class=" tab-pane" id="timeline7">
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($mountings as $mounting)
+                                        <div class="box-body box-profile pull-left">
+                                            <a href="{{ route('actors.show', $mounting->slug) }}"><img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-center">{{ $mounting->name, $mounting->id }}</h3>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                             <!-- /.tab-pane -->
 

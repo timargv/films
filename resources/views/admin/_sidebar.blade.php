@@ -31,10 +31,12 @@
                 </span>
             </a></li>
          <li class="{{{ (Request::is('admin/carers*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('carers.index') }}"><i class="fa fa-comment"></i> <span>Профессии</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> <span>Страны</span></a></li>
-         
-        <li><a href="#"><i class="fa fa-comment-o"></i> <span>Рецензии</span></a></li>
-        <li><a href="#"><i class="fa fa-comments"></i> <span>Комменты</span></a></li>
+
+          <li class="{{{ (Request::is('admin/countries*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('countries.index') }}"><i class="fa fa-comment-o"></i> <span>Страны</span></a></li>
+          <li class="{{{ (Request::is('admin/years*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('years.index') }}"><i class="fa fa-comment-o"></i> <span>Год</span></a></li>
+          <li><a href="#"><i class="fa fa-circle-o"></i> <span>Рецензии</span></a></li>
+
+          <li><a href="#"><i class="fa fa-comments"></i> <span>Комменты</span></a></li>
         <li><a href="#"><i class="fa fa-comment"></i> <span>Отзывы</span></a></li>
 
       </ul>

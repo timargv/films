@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Director extends Model
+class Artist extends Model
 {
     protected $table = 'actors';
 
@@ -12,9 +12,11 @@ class Director extends Model
     public function films () {
         return $this->belongsToMany(
             Film::class,
-            'film_directors',
-            'director_id',
+            'film_artists',
+            'artist_id',
             'film_id'
         );
     }
 }
+
+

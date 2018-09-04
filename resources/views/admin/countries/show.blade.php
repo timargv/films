@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {{ $carer->title }}(и/ы)
+                {{ $carer->title }}
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -36,7 +36,7 @@
                               <tr>
                                 <td style="padding-left: 15px;">{{ $actor->id }}</td>
                                 <td>{{ $actor->image }}</td>
-                                <td><a href="{{ route('actors.show', $actor->slug)}}">{{ $actor->name }}</a></td>
+                                <td><a href="{{ route('carers.show', $actor->slug)}}">{{ $actor->name }}</a></td>
                                 <td>
                                   @foreach($actor->carers as $carer)
                                         @if($carer->title == 'Актер')
@@ -65,7 +65,7 @@
                                     <a class="form-inline" href="{{ route('carers.edit', $actor->id) }}">ред.</a>
 
                                     {{ Form::open(['route' => ['actors.destroy', $actor->id], 'method' => 'delete', 'class' => 'form-group']) }}
-                                    <button onclick="return confirm('Удалить?')" class="btn btn-link btn-xs">удалить</button>
+                                    <button onclick="return confirm('Удалить?')" class="btn btn-link">удалить</button>
                                     {{ Form::close() }}
                                   </div>
                                 </td>

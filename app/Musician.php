@@ -4,17 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Writers extends Model
+/**
+ * @property \Carbon\Carbon $created_at
+ * @property int $id
+ * @property \Carbon\Carbon $updated_at
+ * @property mixed $films
+ */
+class Musician extends Model
 {
-
     protected $table = 'actors';
 
     //-------------------
     public function films () {
         return $this->belongsToMany(
             Film::class,
-            'film_actors',
-            'writer_id',
+            'film_musicians',
+            'musician_id',
             'film_id'
         );
     }

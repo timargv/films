@@ -20,6 +20,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::resource('actors', 'ActorsController');
       Route::resource('films', 	'FilmsController');
       Route::resource('genres', 'GenresController');
+      Route::resource('countries', 'CountriesController');
+      Route::resource('years', 'YearsController');
       Route::resource('carers', 'CarersController');
-      Route::delete('carers', ['as'=>'carers.dest', 'uses'=>'CarersController@dest']);
+
+
+    Route::delete('carers', ['as'=>'carers.dest', 'uses'=>'CarersController@dest']);
+    Route::delete('years', 'YearsController@dest')->name('years.dest');
 });

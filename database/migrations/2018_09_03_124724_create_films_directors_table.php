@@ -17,7 +17,7 @@ class CreateFilmsDirectorsTable extends Migration
             $table->increments('id');
             $table->integer('film_id');
             $table->integer('director_id');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

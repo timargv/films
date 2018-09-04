@@ -35,32 +35,91 @@
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                         <input name="title" type="text" class="form-control" placeholder="Иван"></div>
                                 </div>
-                                <div class="col-xs-6">                                
+
+                                <div class="col-xs-6">
                                     <div class="form-group">
-                                      <label>Жанры</label>
-                                      {{Form::select('genres[]', 
-                                        $genres, 
-                                        null, 
-                                        ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите жанры'])
-                                      }}
+                                        <label>Год</label>
+                                        {{Form::select('years[]',
+                                          $years,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Год'])
+                                        }}
                                     </div>
                                     <div class="form-group">
-                                      <label>Актеры</label>
-                                      {{Form::select('actors[]', 
-                                        $actors, 
-                                        null, 
-                                        ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
-                                      }}
+                                        <label>Страна</label>
+                                        {{Form::select('countries[]',
+                                          $countries,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Страну'])
+                                        }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Жанры</label>
+                                        {{Form::select('genres[]',
+                                          $genres,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите жанры'])
+                                        }}
                                     </div>
 
+                                    <div class="form-group">
+                                        <label>Актеры</label>
+                                        {{Form::select('actors[]',
+                                          $actors,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
+                                        }}
+                                    </div>
                                     <div class="form-group">
                                         <label>Режиссер</label>
                                         {{Form::select('directors[]',
                                           $directors,
                                           null,
-                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Режиссера'])
                                         }}
                                     </div>
+                                    <div class="form-group">
+                                        <label>Сценарист</label>
+                                        {{Form::select('writers[]',
+                                          $writers,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Сценариста'])
+                                        }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Оператор</label>
+                                        {{Form::select('operators[]',
+                                          $operators,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Оператора'])
+                                        }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Композитор</label>
+                                        {{Form::select('musicians[]',
+                                          $musicians,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Композитора'])
+                                        }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Художник</label>
+                                        {{Form::select('artists[]',
+                                          $artists,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Художника'])
+                                        }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Монтаж</label>
+                                        {{Form::select('mountings[]',
+                                          $mountings,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Монтажера'])
+                                        }}
+                                    </div>
+
                                 </div>
                             </div>
 

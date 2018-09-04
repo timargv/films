@@ -33,8 +33,7 @@
 
                                             <h3 class="profile-username text-left">{{ $film->title }}</h3>
                                            @foreach($actors as $actor)
-                                                        {{ $actor->name }} - {{$carerActor}}
-                                               @endforeach
+                                                        {{ $actor->name }}
                                            @endforeach
                                         </div>
                                     @endforeach

@@ -41,13 +41,12 @@ class CreateFilmsTable extends Migration
 //            жанры             - genre_id
 //            страна            - country_id
 //            год               - year_id
-//            сценарий          - scenario
-//            продюсер          - producer
+//            сценарий          - writer
+//            продюсер          - director
 //            оператор          - operator
 //            композитор        - composer
 //            художник          - artist
 //            монтаж            - mounting
-//            жанр              - genre
 //            бюджет            - budget
 //            сборы в США       - fees in the USA
 //            сборы в мире      - fees in the world

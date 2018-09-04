@@ -17,7 +17,7 @@ class CreateFilmsGenresTable extends Migration
             $table->increments('id');
             $table->integer('film_id');
             $table->integer('genre_id');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 
