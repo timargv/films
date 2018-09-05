@@ -30,4 +30,13 @@ class Carer extends Model
         ];
     }
 
+    //-------------------
+    public function remove()
+    {
+        Year::deleted(function ($carer) {
+            $carer->actors()->detach();
+        });
+        $this->delete();
+    }
+
 }

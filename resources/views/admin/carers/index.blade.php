@@ -45,9 +45,7 @@
                 </div>
 
                 
-                {{ Form::open(['route' => 'carers.dest', 'method' => 'post', 'class' => 'form-group']) }}
-                <input type="hidden" name="_method" value="delete">
-          
+
 
                 <div class=" box-body table-responsive no-padding mailbox-messages">
                     <table class="table table-hover">
@@ -56,9 +54,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th style="width: 50px;padding-left: 15px;">                                 
-                                <button onclick="return confirm('Удалить?')" class="btn btn-link btn-md fa fa-trash checkbox-toggle"  style="padding: 3px"> </button>
-                            </th>
+
                             <th style="width: 50px;padding-left: 15px;">ID</th>
                             <th>Название</th>
 
@@ -66,11 +62,7 @@
                         </tr>
                         @foreach($carers as $carer)
                             <tr>
-                                <td style="padding-left: 15px;">
-                                          <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false" >
-                                            <input type="checkbox" class="minimal" name="carers[]"  value="{{ $carer->id }}" >
-                                            <ins class="iCheck-helper"></ins></div>
-                                </td> 
+
                                 <td style="padding-left: 15px;">{{ $carer->id }}</td>
                                 <td><a href="{{ route('carers.show', $carer->slug)}}">{{ $carer->title }}</a></td>
 
@@ -93,8 +85,7 @@
                 <div class="box-footer clearfix">
                     {{-- {{$carers->links()}} --}}
                 </div>
-                {{ Form::close() }}
-            </div>     
+            </div>
 
         </section>
         <!-- /.content -->

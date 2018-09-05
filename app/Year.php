@@ -28,6 +28,15 @@ class Year extends Model
     }
 
     //-------------------
+    public function remove()
+    {
+        Year::deleted(function ($year) {
+            $year->films()->detach();
+        });
+        $this->delete();
+    }
+
+    //-------------------
     public function sluggable()
     {
         return [

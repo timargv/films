@@ -45,9 +45,7 @@
                 </div>
 
                 
-                {{ Form::open(['route' => 'years.dest', 'method' => 'post', 'class' => 'form-group']) }}
-                <input type="hidden" name="_method" value="delete">
-          
+
 
                 <div class=" box-body table-responsive no-padding mailbox-messages">
                     <table class="table table-hover">
@@ -56,22 +54,16 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th style="width: 50px;padding-left: 15px;">                                 
-                                <button onclick="return confirm('Удалить?')" class="btn btn-link btn-md fa fa-trash checkbox-toggle"  style="padding: 3px"> </button>
-                            </th>
-                            {{--<th style="width: 50px;padding-left: 15px;">ID</th>--}}
+
+                            <th style="width: 50px;padding-left: 15px;">ID</th>
                             <th>Год</th>
 
                             <th></th>
                         </tr>
                         @foreach($years as $year)
                             <tr>
-                                <td style="padding-left: 15px;">
-                                          <div class="icheckbox_minimal-blue" aria-checked="false" aria-disabled="false" >
-                                            <input type="checkbox" class="minimal" name="year[]"  value="{{ $year->id }}" >
-                                            <ins class="iCheck-helper"></ins></div>
-                                </td> 
-                                {{--<td style="padding-left: 15px;">{{ $year->id }}</td>--}}
+
+                                <td style="padding-left: 15px;">{{ $year->id }}</td>
                                 <td><a href="{{ route('years.show', $year->slug)}}">{{ $year->year }}</a></td>
 
                                 <td width="150px">
@@ -93,8 +85,7 @@
                 <div class="box-footer clearfix">
                      {{$years->links()}}
                 </div>
-                {{ Form::close() }}
-            </div>     
+            </div>
 
         </section>
         <!-- /.content -->

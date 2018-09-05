@@ -52,13 +52,7 @@ class CarersController extends Controller
 
     public function destroy($id)
     {
-        Carer::find($id)->delete();
-        return back();
-    }
-
-    public function dest(Request $request)
-    {
-        Carer::destroy($request->carers); 
+        Carer::findOrFail($id)->remove();
         return back();
     }
 

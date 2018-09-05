@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Related;
 use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -88,11 +89,9 @@ class YearsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function dest(Request $request)
-    {
-        Year::destroy($request->years);
+        Year::findOrFail($id)->remove();
         return back();
     }
+
+
 }

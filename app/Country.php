@@ -28,6 +28,15 @@ class Country extends Model
     }
 
     //-------------------
+    public function remove()
+    {
+        Country::deleted(function ($country) {
+            $country->films()->detach();
+        });
+        $this->delete();
+    }
+
+    //-------------------
     public function sluggable()
     {
         return [

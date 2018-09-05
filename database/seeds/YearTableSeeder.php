@@ -13,6 +13,13 @@ class YearTableSeeder extends Seeder
     public function run()
     {
         //
+        Year::create(['year' => '2025']);
+        Year::create(['year' => '2024']);
+        Year::create(['year' => '2023']);
+        Year::create(['year' => '2022']);
+        Year::create(['year' => '2021']);
+        Year::create(['year' => '2020']);
+        Year::create(['year' => '2019']);
         Year::create(['year' => '2018']);
         Year::create(['year' => '2017']);
         Year::create(['year' => '2016']);

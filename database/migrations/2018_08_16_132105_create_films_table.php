@@ -18,22 +18,14 @@ class CreateFilmsTable extends Migration
             $table->string('title');
             $table->string('original_title')->nullable();
             $table->string('slogan')->nullable();
-            // $table->integer('actor_id');
-            // $table->integer('genre_id');
-//            $table->integer('country_id')->nullable();
-//            $table->integer('year_id')->nullable();
-//            $table->integer('director_id')->nullable();
-//            $table->integer('operator_id')->nullable();
-//            $table->integer('composer_id')->nullable();
-//            $table->integer('artist_id')->nullable();
-//            $table->integer('mounting_id')->nullable();
             $table->string('budget')->nullable();
             $table->date('world_premiere')->nullable();
             $table->integer('age')->nullable();
             $table->float('rating')->nullable();
-            $table->float('time')->nullable();
-//            $table->string('subject_id')->nullable();
+            $table->string('time')->nullable();
             $table->string('poster_img')->nullable();
+            $table->string('sh_description')->nullable();
+            $table->text('description')->nullable();
             $table->text('video_field')->nullable();
             $table->string('slug');
 
@@ -59,6 +51,7 @@ class CreateFilmsTable extends Migration
 //            рейтинг PG-13     - rating PG-13
 //            время             - time
 //            тематика          - subjects
+//            связанные фильмы  - films_id
 
 
             $table->timestamps();

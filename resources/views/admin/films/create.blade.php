@@ -30,10 +30,23 @@
                             @include('admin.errors')
                             <div class="clearfix row">
                                 <div class="col-xs-6">
+                                    <div class="form-group">
+
                                     <label>Имя</label>
                                     <div class="input-group ">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                         <input name="title" type="text" class="form-control" placeholder="Иван"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Связанные Фильмы</label>
+                                        {{Form::select('relateds[]',
+                                          $relateds,
+                                          null,
+                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Фильм'])
+                                        }}
+
+                                    </div>
                                 </div>
 
                                 <div class="col-xs-6">
@@ -73,7 +86,7 @@
                                     <div class="form-group">
                                         <label>Режиссер</label>
                                         {{Form::select('directors[]',
-                                          $directors,
+                                          $actors,
                                           null,
                                           ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Режиссера'])
                                         }}
@@ -81,7 +94,7 @@
                                     <div class="form-group">
                                         <label>Сценарист</label>
                                         {{Form::select('writers[]',
-                                          $writers,
+                                          $actors,
                                           null,
                                           ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Сценариста'])
                                         }}
@@ -90,7 +103,7 @@
                                     <div class="form-group">
                                         <label>Оператор</label>
                                         {{Form::select('operators[]',
-                                          $operators,
+                                          $actors,
                                           null,
                                           ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Оператора'])
                                         }}
@@ -98,7 +111,7 @@
                                     <div class="form-group">
                                         <label>Композитор</label>
                                         {{Form::select('musicians[]',
-                                          $musicians,
+                                          $actors,
                                           null,
                                           ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Композитора'])
                                         }}
@@ -106,7 +119,7 @@
                                     <div class="form-group">
                                         <label>Художник</label>
                                         {{Form::select('artists[]',
-                                          $artists,
+                                          $actors,
                                           null,
                                           ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Художника'])
                                         }}
@@ -114,7 +127,7 @@
                                     <div class="form-group">
                                         <label>Монтаж</label>
                                         {{Form::select('mountings[]',
-                                          $mountings,
+                                          $actors,
                                           null,
                                           ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Монтажера'])
                                         }}

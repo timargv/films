@@ -7,11 +7,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {{ $film->title }}
-                <small>приятные слова..</small>
+                #{{ $film->id }} {{ $film->title }}
+                <small>{{ $film->slogan }}..</small>
             </h1>
         </section>
-
 
 
         <!-- Main content -->
@@ -23,11 +22,11 @@
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <div class="thumbnail" style="border: 0; padding: 0; overflow: hidden">
-                                <img class="img-responsive " src="../../img/iphone.jpg" alt="User profile picture">
+                                <img class="img-responsive " src="{{ $film->getImage() }}" alt="User profile picture">
                             </div>
                             <h3 class="profile-username text-center">{{ $film->title }}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">{{ $film->original_title }}</p>
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item clearfix">
@@ -38,10 +37,45 @@
 
                                 </li>
                                 <li class="list-group-item clearfix">
-                                    <b>Following</b> <a class="pull-right">543</a>
+                                    <b>Год</b>
+
+                                    @foreach($years as $year)
+                                            <a class="pull-right" href="{{ route('years.show', $year->slug) }}"><span class="badge bg-yellow">{{ $year->year }}</span></a>
+                                        @endforeach
                                 </li>
                                 <li class="list-group-item clearfix">
-                                    <b>Friends</b> <a class="pull-right">13,287</a>
+                                    <b>Страна</b>
+                                        @foreach($countries as $country)
+                                            <a class="pull-right" href="{{ route('countries.show', $country->slug) }}"><span class="badge bg-yellow">{{ $country->country }}</span></a>
+                                        @endforeach
+                                </li>
+
+                                <li class="list-group-item clearfix">
+                                    <b>Бюджет</b> <a class="pull-right">
+                                       {{ $film->budget }} руб.
+                                    </a>
+                                </li>
+                                <li class="list-group-item clearfix">
+                                    <b>Мировая Премьера</b> <a class="pull-right">
+                                        {{ $film->world_premiere }}
+                                    </a>
+                                </li>
+                                <li class="list-group-item clearfix">
+                                    <b>Возрастное ограничение</b> <a class="pull-right">
+                                        {{ $film->age }}
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item clearfix">
+                                    <b>Рейтинг</b> <a class="pull-right">
+                                        {{ $film->rating }}
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item clearfix">
+                                    <b>Время</b> <a class="pull-right">
+                                        {{ $film->time }}
+                                    </a>
                                 </li>
                             </ul>
 
@@ -104,6 +138,7 @@
                             <li class=""><a href="#timeline5" data-toggle="tab">Композитор</a></li>
                             <li class=""><a href="#timeline6" data-toggle="tab">Художник</a></li>
                             <li class=""><a href="#timeline7" data-toggle="tab">Монтаж</a></li>
+                            <li class=""><a href="#timeline8" data-toggle="tab">Связанные фильмы</a></li>
 
                         </ul>
                         <div class="tab-content">
@@ -195,6 +230,21 @@
                                             <h3 class="profile-username text-center">{{ $mounting->name, $mounting->id }}</h3>
                                         </div>
                                     @endforeach
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class=" tab-pane" id="timeline8">
+                                <p></p>
+                                <div class="clearfix">
+                                    @foreach($relateds as $related)
+                                        <div class="box-body box-profile col-xs-6 col-md-2">
+                                            <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $related->slug) }}"><img class="img-responsive " src="../../img/iphone.jpg" alt="User profile picture"></a>
+                                            <h3 class="profile-username text-left">{{ $related->title }}</h3>
+                                        </div>
+                                    @endforeach
+                                    <hr>
+
                                 </div>
                             </div>
                             <!-- /.tab-pane -->

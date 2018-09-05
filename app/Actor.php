@@ -72,6 +72,10 @@ class Actor extends Model
     //-------------------
     public function remove()
     {
+        Actor::deleted(function ($actor) {
+            $actor->carers()->detach();
+            $actor->films()->detach();
+        });
         $this->delete();
     }
 

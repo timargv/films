@@ -68,7 +68,7 @@ class ActorsController extends Controller
 
     public function destroy($id)
     {
-        Actor::find($id)->delete();
+        Actor::findOrFail($id)->remove();
         return redirect()->back();
     }
 }

@@ -31,7 +31,11 @@ class Genre extends Model
     }
 
     //-------------------
-    public function countFilms($slug) {
-
+    public function remove()
+    {
+        Year::deleted(function ($genre) {
+            $genre->films()->detach();
+        });
+        $this->delete();
     }
 }

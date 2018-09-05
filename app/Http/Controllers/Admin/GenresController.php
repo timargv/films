@@ -95,5 +95,7 @@ class GenresController extends Controller
     public function destroy($id)
     {
         //
+        Genre::findOrFail($id)->remove();
+        return back();
     }
 }

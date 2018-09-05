@@ -4,6 +4,7 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property \Carbon\Carbon $created_at
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property mixed $musicians
  * @property mixed $years
  * @property mixed $operators
+ * @property mixed $relateds
  */
 class Film extends Model
 {
@@ -29,25 +31,27 @@ class Film extends Model
         'title',
         'original_title',
         'slogan',
-        // 'actor_id',
-        // 'genre_id',
-        // 'country_id',
-        // 'year_id',
-        // 'director_id',
-        // 'operator_id',
-        // 'composer_id',
-        // 'artist_id',
-        // 'mounting_id',
         'budget',
         'world_premiere',
         'age',
         'rating',
         'time',
-        // 'subject_id',
         'poster_img',
+        'sh_description',
+        'description',
         'video_field',
         'slug'
     ];
+
+    //-------------------
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     // protected $guarded = ['id'];
 
@@ -56,6 +60,17 @@ class Film extends Model
         return $lists;
     }
 
+
+
+    //------------------- relateds films
+    public function relateds() {
+        return $this->belongsToMany(
+            Film::class,
+            'film_relateds',
+            'film_id',
+            'related_id'
+        );
+    }
 
     //-------------------
     public function actors()
@@ -142,15 +157,7 @@ class Film extends Model
         );
     }
 
-    //-------------------
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
+
 
     //-------------------
     public static function add($fields)
@@ -172,9 +179,55 @@ class Film extends Model
     //-------------------
     public function remove()
     {
+        $this->removeImage();
+        Film::deleted(function ($film) {
+
+            $film->genres()->detach();
+            $film->actors()->detach();
+            $film->directors()->detach();
+            $film->writers()->detach();
+            $film->artists()->detach();
+            $film->countries()->detach();
+            $film->mountings()->detach();
+            $film->musicians()->detach();
+            $film->operators()->detach();
+            $film->years()->detach();
+            $film->relateds()->detach();
+
+        });
+
         $this->delete();
     }
 
+    //-------------------
+    public function removeImage()
+    {
+        if($this->poster_img != null)
+        {
+            Storage::delete('uploads/films/' . $this->poster_img);
+        }
+    }
+
+    //-------------------
+    public function uploadImage($poster_img)
+    {
+        if($poster_img == null) { return; }
+        $this->removeImage();
+        $filename = str_random(18) . '.' . $poster_img->extension();
+        $poster_img->storeAs('uploads/films', $filename);
+        $this->poster_img = $filename;
+        $this->save();
+    }
+
+    //-------------------
+    public function getImage()
+    {
+        if($this->poster_img == null)
+        {
+            return '/img/no-image.png';
+        }
+        return '/uploads/films/' . $this->poster_img;
+    }
 
 
     //---------------------------------------//
@@ -248,6 +301,13 @@ class Film extends Model
         $this->years()->sync($ids);
     }
 
+    //-------------------
+    public function setRelateds($ids)
+    {
+        if ($ids === null) { return; }
+        $this->relateds()->sync($ids);
+    }
+
 
 
     //-------------------
@@ -266,6 +326,8 @@ class Film extends Model
             ?   implode(', ', $this->genres->pluck('title')->all())
             :   'Нет жанра';
     }
+
+
 
 
     //-------------------

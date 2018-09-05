@@ -12,6 +12,7 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         'age'               => rand(16, 18),
         'rating'            => rand(1, 10),
         'time'              => rand(60, 360),
-        'poster_img'        => 'http://www.omdbapi.com/src/poster.jpg',
+        'poster_img'        => 'http://www.omdbapi.com/src/poster.jpg'
+//        'slug'              => $faker->unique()
     ];
 });

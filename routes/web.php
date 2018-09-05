@@ -24,7 +24,4 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::resource('years', 'YearsController');
       Route::resource('carers', 'CarersController');
 
-
-    Route::delete('carers', ['as'=>'carers.dest', 'uses'=>'CarersController@dest']);
-    Route::delete('years', 'YearsController@dest')->name('years.dest');
 });
