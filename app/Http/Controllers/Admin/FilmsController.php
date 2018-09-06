@@ -7,9 +7,11 @@ use App\Film;
 use App\Genre;
 //use App\Actor;
 use App\Related;
+use App\Thematic;
 use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FilmsController extends Controller
 {
@@ -20,8 +22,8 @@ class FilmsController extends Controller
      */
     public function index()
     {
-        $films = Film::orderByDesc('created_at')->paginate(15);
-
+        $films = Film::orderBy('id', 'desc')->paginate(15);
+//        $films = DB::table('films')->orderBy('id', 'asc')->paginate(15);
         return view('admin.films.index', compact('films'));
     }
 
@@ -36,11 +38,12 @@ class FilmsController extends Controller
         $years      = Year::pluck('year', 'id')->all();
         $countries  = Country::pluck('country', 'id')->all();
         $relateds   = Related::pluck('title', 'id')->all();
+        $thematics   = Thematic::pluck('title', 'id')->all();
 
         $filmis = new Film();
         $actors = $filmis->allAct($filmis);
 
-        return view('admin.films.create', compact('genres', 'actors', 'countries', 'relateds', 'years'));
+        return view('admin.films.create', compact('genres', 'actors', 'countries', 'relateds', 'years', 'thematics'));
     }
 
     /**
@@ -53,7 +56,8 @@ class FilmsController extends Controller
     {
       
         $this->validate($request, [
-            'title' =>'required', 
+            'title' => 'required',
+            'date'  => 'nullable'
         ]);
 
         $film = Film::add($request->all());
@@ -69,6 +73,13 @@ class FilmsController extends Controller
         $film->setOperators($request->get('operators'));
         $film->setYears($request->get('years'));
         $film->setRelateds($request->get('relateds'));
+        $film->setThematics($request->get('thematics'));
+
+        if ($request->get('action') == 'save'){
+            return redirect()->back();
+        } elseif ($request->get('action') == 'saveAdd') {
+            return redirect()->route('films.create');
+        }
 
         return redirect()->route('films.index');
     }
@@ -105,13 +116,9 @@ class FilmsController extends Controller
         $years      = $film->years()->get();
         $writers    = $film->writers()->get();
         $relateds   = $film->relateds()->get();
+        $thematics  = $film->thematics()->get();
 
-
-
-
-
-
-        return view('admin.films.show', compact('film',  'actors', 'genres', 'directors', 'writers', 'artists','countries', 'mountings', 'musicians', 'operators', 'years', 'relateds'));
+        return view('admin.films.show', compact('film',  'actors', 'genres', 'directors', 'writers', 'artists','countries', 'mountings', 'musicians', 'operators', 'years', 'relateds', 'thematics'));
     }
 
     /**
@@ -128,6 +135,7 @@ class FilmsController extends Controller
         $years      = Year::pluck('year', 'id')->all();
         $countries  = Country::pluck('country', 'id')->all();
         $relateds   = Related::pluck('title', 'id')->all();
+        $thematics  = Thematic::pluck('title', 'id')->all();
 
 
         $filmis = new Film();
@@ -144,10 +152,11 @@ class FilmsController extends Controller
         $selectedOperators  = $film->operators->pluck('id')->all();
         $selectedYears      = $film->years->pluck('id')->all();
         $selectedRelateds   = $film->relateds->pluck('id')->all();
+        $selectedThematics  = $film->thematics->pluck('id')->all();
 
 
         return view('admin.films.edit', compact(
-            'film', 'actors', 'genres',  'countries',   'years', 'relateds',
+            'film', 'actors', 'genres',  'countries',   'years', 'relateds', 'thematics',
             'selectedGenres',
             'selectedActors',
             'selectedDirectors',
@@ -158,7 +167,8 @@ class FilmsController extends Controller
             'selectedMusicians',
             'selectedOperators',
             'selectedYears',
-            'selectedRelateds'
+            'selectedRelateds',
+            'selectedThematics'
         ));
     }
 
@@ -189,7 +199,15 @@ class FilmsController extends Controller
         $film->setOperators($request->get('operators'));
         $film->setYears($request->get('years'));
         $film->setRelateds($request->get('relateds'));
+        $film->setThematics($request->get('thematics'));
 
+        if ($request->get('action') == 'save'){
+            return redirect()->back();
+        } elseif ($request->get('action') == 'saveAdd') {
+            return redirect()->route('films.create');
+        } elseif ($request->get('action') == 'saveView') {
+            return redirect()->route('films.show', $film->slug);
+        }
         return redirect()->route('films.index');
     }
 

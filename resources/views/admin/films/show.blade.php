@@ -7,6 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
+
                 #{{ $film->id }} {{ $film->title }}
                 <small>{{ $film->slogan }}..</small>
             </h1>
@@ -52,12 +53,12 @@
 
                                 <li class="list-group-item clearfix">
                                     <b>Бюджет</b> <a class="pull-right">
-                                       {{ $film->budget }} руб.
+                                       {{ $film->budget }} RUB.
                                     </a>
                                 </li>
                                 <li class="list-group-item clearfix">
                                     <b>Мировая Премьера</b> <a class="pull-right">
-                                        {{ $film->world_premiere }}
+                                        {{ $film->getDate() }}
                                     </a>
                                 </li>
                                 <li class="list-group-item clearfix">
@@ -75,6 +76,14 @@
                                 <li class="list-group-item clearfix">
                                     <b>Время</b> <a class="pull-right">
                                         {{ $film->time }}
+                                    </a>
+                                </li>
+
+                                <li class="list-group-item clearfix">
+                                    <b>Тематика</b> <a class="pull-right">
+                                        @foreach($thematics as $thematic)
+                                            <a class="pull-right" href="{{ route('thematics.show', $thematic->slug) }}"><span class="badge bg-yellow">{{ $thematic->title }}</span></a>
+                                        @endforeach
                                     </a>
                                 </li>
                             </ul>
@@ -128,6 +137,27 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    Трейлер
+                                </div>
+                                <div class="box-body">
+                                    <iframe width="575" height="315" src="{{ $film->trailer_field }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="box box-primary">
+                                <div class="box-header">Плеер Фильма</div>
+                                <div class="box-body">
+                                    {{ $film->video_field }}
+                                    <div id="trailerDiv"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
 
@@ -139,6 +169,7 @@
                             <li class=""><a href="#timeline6" data-toggle="tab">Художник</a></li>
                             <li class=""><a href="#timeline7" data-toggle="tab">Монтаж</a></li>
                             <li class=""><a href="#timeline8" data-toggle="tab">Связанные фильмы</a></li>
+                            <li class="pull-right"><a class="text-muted"  href="{{ route('films.edit', $film->id) }}"><i class="fa fa-pencil-square-o"></i></a></li>
 
                         </ul>
                         <div class="tab-content">
@@ -254,6 +285,19 @@
                         <!-- /.tab-content -->
                     </div>
                     <!-- /.nav-tabs-custom -->
+
+                    <div class="box box-primary">
+                        <div class="box-header">Краткое описание</div>
+                        <div class="box-body">
+                            <p>{{ $film->sh_description }}</p>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header">Полное описание</div>
+                        <div class="box-body">
+                            <p>{{ $film->description }}</p>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.col -->
             </div>

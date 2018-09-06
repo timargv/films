@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Country;
+use App\Thematic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CountriesController extends Controller
+class ThematicsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
-        return view('admin.countries.index', compact('countries'));
+        $thematics = Thematic::paginate(15);
+        return view('admin.thematics.index', compact('thematics'));
     }
 
     /**
@@ -26,8 +26,7 @@ class CountriesController extends Controller
      */
     public function create()
     {
-        //
-//        return view('admin.countries.create');
+        return view('admin.thematics.create');
     }
 
     /**
@@ -39,6 +38,11 @@ class CountriesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+           'title' => 'required'
+        ]);
+        Thematic::create($request->all());
+        return redirect()->route('thematics.index');
     }
 
     /**
@@ -47,9 +51,13 @@ class CountriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
+        $thematic = Thematic::where('slug', $slug)->firstOrFail();
+        $films = $thematic->films()->get();
+
+        return view('admin.thematics.show', compact('thematic', 'films'));
     }
 
     /**
@@ -60,7 +68,8 @@ class CountriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $thematic = Thematic::findOrFail($id);
+        return view('admin.thematics.edit', compact('thematic'));
     }
 
     /**
@@ -72,7 +81,13 @@ class CountriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required'
+        ]);
+
+        $thematic = Thematic::find($id);
+        $thematic->update($request->all());
+        return redirect()->route('thematics.index');
     }
 
     /**
@@ -83,7 +98,8 @@ class CountriesController extends Controller
      */
     public function destroy($id)
     {
-        Country::findOrFail($id)->remove();
+        //
+        Thematic::findOrFail($id)->remove();
         return redirect()->back();
     }
 }

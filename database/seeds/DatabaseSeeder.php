@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
          $this->call(CarerTableSeeder::class);
          $this->call(FilmTableSeeder::class);
          $this->call(CountryTableSeeder::class);
-         $this->call(YearTableSeeder::class);
+        $this->call(YearTableSeeder::class);
+        $this->call(ThematicTableSeeder::class);
 
          for ($i = 1; $i < 11; $i++) {
              DB::table('actor_carers')->insert([
@@ -47,6 +48,84 @@ class DatabaseSeeder extends Seeder
                 ['film_id' => $i, 'actor_id' => rand(26, 30)],
                 ['film_id' => $i, 'actor_id' => rand(31, 35)],
                 ['film_id' => $i, 'actor_id' => rand(36, 40)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_directors')->insert([
+                ['film_id' => $i, 'director_id' => rand(1, 31)],
+                ['film_id' => $i, 'director_id' => rand(1, 31)],
+                ['film_id' => $i, 'director_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_writers')->insert([
+                ['film_id' => $i, 'writer_id' => rand(1, 31)],
+                ['film_id' => $i, 'writer_id' => rand(1, 31)],
+                ['film_id' => $i, 'writer_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 150; $i++) {
+            DB::table('film_years')->insert([
+                ['film_id' => $i, 'year_id' => rand(1, 120)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_countries')->insert([
+                ['film_id' => $i, 'country_id' => rand(1, 31)],
+                ['film_id' => $i, 'country_id' => rand(32, 62)],
+                ['film_id' => $i, 'country_id' => rand(63, 200)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_operators')->insert([
+                ['film_id' => $i, 'operator_id' => rand(1, 31)],
+                ['film_id' => $i, 'operator_id' => rand(1, 31)],
+                ['film_id' => $i, 'operator_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_musicians')->insert([
+                ['film_id' => $i, 'musician_id' => rand(1, 31)],
+                ['film_id' => $i, 'musician_id' => rand(1, 31)],
+                ['film_id' => $i, 'musician_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_artists')->insert([
+                ['film_id' => $i, 'artist_id' => rand(1, 31)],
+                ['film_id' => $i, 'artist_id' => rand(1, 31)],
+                ['film_id' => $i, 'artist_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_mountings')->insert([
+                ['film_id' => $i, 'mounting_id' => rand(1, 31)],
+                ['film_id' => $i, 'mounting_id' => rand(1, 31)],
+                ['film_id' => $i, 'mounting_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_relateds')->insert([
+                ['film_id' => $i, 'related_id' => rand(1, 31)],
+                ['film_id' => $i, 'related_id' => rand(1, 31)],
+                ['film_id' => $i, 'related_id' => rand(1, 31)],
+            ]);
+        }
+
+        for ($i = 1; $i < 50; $i++) {
+            DB::table('film_thematics')->insert([
+                ['film_id' => $i, 'thematic_id' => rand(1, 31)],
+                ['film_id' => $i, 'thematic_id' => rand(1, 31)],
+                ['film_id' => $i, 'thematic_id' => rand(1, 31)],
             ]);
         }
 

@@ -23,5 +23,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::resource('countries', 'CountriesController');
       Route::resource('years', 'YearsController');
       Route::resource('carers', 'CarersController');
-
+      Route::resource('thematics', 'ThematicsController');
 });

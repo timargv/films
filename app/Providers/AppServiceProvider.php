@@ -15,14 +15,12 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
 
-
     public function boot()
     {
-
         //
         view()->composer('admin._sidebar', function($view){
             $view->with('countFilms', Film::all()->count());
-            $view->with('countActors', Actor::all()->count());
+            $view->with('countActors', count(Actor::all()));
         });
 
     }

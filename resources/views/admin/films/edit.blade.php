@@ -27,7 +27,10 @@
                                 <input type="file" id="exampleInputFile" name="poster_img">
                             </div>
 
-                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                            <div class="btn-group " role="toolbar" style="width: 100%">
+                                <button type="submit" name="action" value="save" class="btn btn-default btn-block"><b>Сохранить картинку</b></button>
+                            </div>
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -244,11 +247,38 @@
                     </div>
                     <!-- /.box -->
 
+
+                    <!-- About Me Box -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Тематика</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="form-group">
+                                {{Form::select('thematics[]',
+                                  $thematics,
+                                  $selectedThematics,
+                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Тематику'])
+                                }}
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
                 </div>
                 <div class="col-md-9">
                     <div class="box box-primary">
-
-                        <div class="box-header">
+                        <div class="box-header with-border">
+                            <div class="pull-right">
+                                <button  class="btn btn-default" name="action" value="saveView">Посмотреть</button>
+                                <button  class="btn btn-default">Сохранить и закрыть</button>
+                                <button  type="submit" name="action" value="saveAdd" class="btn btn-default ">Сохранить и добавить</button>
+                                <a href="{{ route('films.index') }}"  class="btn btn-danger">Выйти</a>
+                            </div>
+                        </div>
+                        <div class="box-header with-border">
                             <div class="form-group">
 
                                 <label>Назание Ru</label>
@@ -266,7 +296,6 @@
                             </div>
 
                         </div>
-                        <hr>
                         <div class=" box-body ">
                             @include('admin.errors')
 
@@ -287,9 +316,14 @@
 
                             <div class="form-group">
 
-                                <label>Мировая Премьера</label>
-                                <div class="input-group ">
-                                    <input name="world_premiere" type="text" class="form-control" placeholder="Иван" value="{{ $film->world_premiere }}"></div>
+                                <label>Мировая Премьера </label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="datepicker" value="{{ $film->date }}" name="date">
+                                </div>
+
                             </div>
 
                             <div class="form-group">
@@ -303,7 +337,9 @@
 
                                 <label>Рейтинг</label>
                                 <div class="input-group ">
-                                    <input name="rating" type="text" class="form-control" placeholder="Иван" value="{{ $film->rating }}"></div>
+
+                                    {{ Form::selectRange('rating', 1, 10, $film->rating, ['class' => 'form-control select', 'data-placeholder'=>'Выберите Фильм']) }}
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -331,7 +367,14 @@
 
                             <div class="form-group">
 
-                                <label>Код Плеера</label>
+                                <label>Трейлер</label>
+                                <div class="input-group ">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input name="trailer_field" type="text" class="form-control" placeholder="Иван" value="{{ $film->trailer_field }}"></div>
+                            </div>
+                            <div class="form-group">
+
+                                <label>Фильм</label>
                                 <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
                                     <input name="video_field" type="text" class="form-control" placeholder="Иван" value="{{ $film->video_field }}"></div>
@@ -352,4 +395,5 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
 @endsection

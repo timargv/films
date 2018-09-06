@@ -6,7 +6,7 @@
         </a>
     </li>
 
-    <li class="{{{ (Request::is('admin/films*', 'admin/genres*', 'admin/actors*', 'admin/carers*') ? 'treeview active' : 'treeview') }}}">
+    <li class="{{{ (Request::is('admin/films*', 'admin/genres*', 'admin/actors*', 'admin/carers*', 'admin/years*', 'admin/countries*', 'admin/thematics*') ? 'treeview active' : 'treeview') }}}">
       <a href="#">
         <i class="fa fa-film"></i>
         <span>Фильмы / Сериалы</span>
@@ -34,6 +34,7 @@
 
           <li class="{{{ (Request::is('admin/countries*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('countries.index') }}"><i class="fa fa-comment-o"></i> <span>Страны</span></a></li>
           <li class="{{{ (Request::is('admin/years*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('years.index') }}"><i class="fa fa-comment-o"></i> <span>Год</span></a></li>
+          <li class="{{{ (Request::is('admin/thematics*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('thematics.index') }}"><i class="fa fa-comment-o"></i> <span>Тематика фильма</span></a></li>
           <li><a href="#"><i class="fa fa-circle-o"></i> <span>Рецензии</span></a></li>
 
           <li><a href="#"><i class="fa fa-comments"></i> <span>Комменты</span></a></li>

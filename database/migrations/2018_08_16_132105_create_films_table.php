@@ -19,13 +19,14 @@ class CreateFilmsTable extends Migration
             $table->string('original_title')->nullable();
             $table->string('slogan')->nullable();
             $table->string('budget')->nullable();
-            $table->date('world_premiere')->nullable();
+            $table->date('date')->nullable();
             $table->integer('age')->nullable();
             $table->float('rating')->nullable();
             $table->string('time')->nullable();
             $table->string('poster_img')->nullable();
             $table->string('sh_description')->nullable();
             $table->text('description')->nullable();
+            $table->text('trailer_field')->nullable();
             $table->text('video_field')->nullable();
             $table->string('slug');
 

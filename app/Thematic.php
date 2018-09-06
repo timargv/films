@@ -5,20 +5,22 @@ namespace App;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
-class Carer extends Model
+class Thematic extends Model
 {
+    //
     use Sluggable;
 
     protected $fillable = ['title', 'slug'];
 
-    public function actors () {
+    public function films() {
         return $this->belongsToMany(
-            Actor::class,
-            'actor_carers',
-            'carer_id',            
-            'actor_id'
+            Film::class,
+            'film_thematics',
+            'thematic_id',
+            'film_id'
         );
     }
+
 
     //-------------------
     public function sluggable()
@@ -33,10 +35,11 @@ class Carer extends Model
     //-------------------
     public function remove()
     {
-        Carer::deleted(function ($carer) {
-            $carer->actors()->detach();
+        Thematic::deleted(function ($thematic) {
+            $thematic->films()->detach();
         });
         $this->delete();
     }
+
 
 }

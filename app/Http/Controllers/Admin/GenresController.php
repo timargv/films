@@ -84,6 +84,14 @@ class GenresController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+           'title' => 'required'
+        ]);
+
+        $genre = Genre::find($id);
+        $genre->update($request->all());
+
+        return redirect()->route('genres.index');
     }
 
     /**

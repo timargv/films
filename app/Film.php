@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Jenssegers\Date\Date;
+
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +35,7 @@ class Film extends Model
         'original_title',
         'slogan',
         'budget',
-        'world_premiere',
+        'date',
         'age',
         'rating',
         'time',
@@ -40,6 +43,7 @@ class Film extends Model
         'sh_description',
         'description',
         'video_field',
+        'trailer_field',
         'slug'
     ];
 
@@ -156,6 +160,14 @@ class Film extends Model
             'year_id'
         );
     }
+    public function thematics () {
+        return $this->belongsToMany(
+            Thematic::class,
+            'film_thematics',
+            'film_id',
+            'thematic_id'
+        );
+    }
 
 
 
@@ -193,6 +205,7 @@ class Film extends Model
             $film->operators()->detach();
             $film->years()->detach();
             $film->relateds()->detach();
+            $film->thematics()->detach();
 
         });
 
@@ -224,7 +237,7 @@ class Film extends Model
     {
         if($this->poster_img == null)
         {
-            return '/img/no-image.png';
+            return '/uploads/films/no-image.jpg';
         }
         return '/uploads/films/' . $this->poster_img;
     }
@@ -308,6 +321,13 @@ class Film extends Model
         $this->relateds()->sync($ids);
     }
 
+    //-------------------
+    public function setThematics($ids)
+    {
+        if ($ids === null) { return; }
+        $this->thematics()->sync($ids);
+    }
+
 
 
     //-------------------
@@ -328,8 +348,22 @@ class Film extends Model
     }
 
 
-
-
     //-------------------
+    public function setDateAttribute($value)
+    {
+        $date = Date::createFromFormat('d/m/y', $value)->format('Y-m-d');
+        $this->attributes['date'] = $date;
+    }
 
+    public function getDateAttribute($value)
+    {
+        $date = Date::createFromFormat('Y-m-d', $value)->format('d/m/y');
+        return $date;
+    }
+
+    public function getDate()
+    {
+        Date::setLocale('ru');
+        return Date::createFromFormat('d/m/y', $this->date)->format('d F, Y');
+    }
 }

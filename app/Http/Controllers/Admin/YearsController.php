@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Film;
 use App\Related;
 use App\Year;
 use Illuminate\Http\Request;
@@ -52,9 +53,16 @@ class YearsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
+        $year = Year::where('slug', $slug)->firstOrFail();
+        $films = $year->films()->get();
+
+        $film = Film::where('id', $year->id)->firstOrFail();
+        $actors = $film->actors()->get();
+
+        return view('admin.years.show', compact('year', 'films', 'actors'));
     }
 
     /**

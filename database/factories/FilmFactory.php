@@ -8,11 +8,15 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         'original_title'    => $faker->lastName,
         'slogan'            => $faker->jobTitle,
         'budget'            => rand(100000, 10000000),
-        'world_premiere'    => $faker->date(),
+        'date'              => '17/09/08',
         'age'               => rand(16, 18),
         'rating'            => rand(1, 10),
         'time'              => rand(60, 360),
-        'poster_img'        => 'http://www.omdbapi.com/src/poster.jpg'
+        'sh_description'    => $faker->text('200'),
+        'description'       => $faker->text('600'),
+        'trailer_field'     => 'https://www.youtube.com/embed/IuLkvgavbK4',
+        'video_field'       => 'https://www.youtube.com/embed/IuLkvgavbK4',
+        'poster_img'        => ''
 //        'slug'              => $faker->unique()
     ];
 });

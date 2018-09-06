@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Год - {{ $year->year }}
+                {{ $thematic->title }} <span class="label label-info">{{ count($thematic->films) }}</span>
                 <small></small>
             </h1>
         </section>
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">Фильмы <span class="label label-info">{{ count($year->films) }}</span></a></li>
+                            <li class="active"><a href="#activity" data-toggle="tab">Фильмы</a></li>
                             <li><a href="#timeline" data-toggle="tab">Сериалы</a></li>
                             <li><a href="#settings" data-toggle="tab">Settings</a></li>
                         </ul>
@@ -30,15 +30,7 @@
                                     @foreach($films as $film)
                                         <div class="box-body box-profile col-xs-6 col-md-2">
                                             <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="../../img/iphone.jpg" alt="User profile picture"></a>
-
-                                            <h3 class="profile-username text-left">{{ $film->title }}  @foreach($film->years as $year) - {{ $year->year }} @endforeach </h3>
-                                            @foreach($film->actors as $actor)
-                                                <a href="{{ route('actors.show', $actor->slug) }}">{{ $actor->name }}</a>,
-                                            @endforeach
-                                            <hr>
-                                            @foreach($film->directors as $director)
-                                                {{ $director->name }},
-                                            @endforeach
+                                            <h3 class="profile-username text-left">{{ $film->title }}</h3>
                                         </div>
                                     @endforeach
                                 </div>
