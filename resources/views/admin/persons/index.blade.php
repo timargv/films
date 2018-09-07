@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Актеры
+                Персоны
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -18,7 +18,7 @@
                 <div class="box-header">
 
                     <div class="">
-                        <a class="btn btn-primary btn-sm" href="{{ route('actors.create') }}"><i class="fa fa-plus"></i> &nbsp; Добавить</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('persons.create') }}"><i class="fa fa-plus"></i> &nbsp; Добавить</a>
                     </div>
 
                     <p></p>
@@ -37,13 +37,13 @@
 
                             <th></th>
                         </tr>
-                        @foreach($actors as $actor)
+                        @foreach($persons as $person)
                             <tr>
-                                <td style="padding-left: 15px;">{{ $actor->id }}</td>
-                                <td>{{ $actor->image }}</td>                                
-                                <td><a href="{{ route('actors.show', $actor->slug)}}">{{ $actor->name }}</a></td>
+                                <td style="padding-left: 15px;">{{ $person->id }}</td>
+                                <td>{{ $person->image }}</td>
+                                <td><a href="{{ route('persons.show', $person->slug)}}">{{ $person->name }}</a></td>
                                 <td>
-                                    @foreach($actor->carers as $carer)
+                                    @foreach($person->carers as $carer)
                                         @if($carer->title == 'Актер')
                                             <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Режиссер')
@@ -66,9 +66,9 @@
 
                                 <td width="150px">
                                     <div class="form-inline">
-                                        <a class="form-inline" href="{{ route('actors.edit', $actor->id) }}">ред.</a>
+                                        <a class="form-inline" href="{{ route('persons.edit', $person->id) }}">ред.</a>
 
-                                        {{ Form::open(['route' => ['actors.destroy', $actor->id], 'method' => 'delete', 'class' => 'form-group']) }}
+                                        {{ Form::open(['route' => ['persons.destroy', $person->id], 'method' => 'delete', 'class' => 'form-group']) }}
                                         <button onclick="return confirm('Удалить?')" class="btn btn-link btn-xs">удалить</button>
                                         {{ Form::close() }}
                                     </div>
@@ -80,7 +80,7 @@
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    {{$actors->links()}}
+                    {{$persons->links()}}
                 </div>
             </div>
         </section>

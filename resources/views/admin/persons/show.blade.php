@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {{ $actor->name }}
+                {{ $person->name }}
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -20,17 +20,17 @@
                   <!-- Profile Image -->
                   <div class="box box-primary">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="../../img/user1-128x128.jpg" alt="User profile picture">
+                      <img class="profile-user-img img-responsive img-circle" src="{{ $person->getImage() }}" alt="User profile picture" height="150px">
 
-                      <h3 class="profile-username text-center">{{ $actor->name }}</h3>
+                      <h3 class="profile-username text-center">{{ $person->name }}</h3>
 
                       <p class="text-muted text-center">Software Engineer</p>
 
                       <ul class="list-group list-group-unbordered">
                         <li class="list-group-item clearfix">
                           <b>Карьера</b> 
-                          <a class="pull-right">
-                            @foreach($actor->carers as $carer)
+                          <span class="pull-right">
+                            @foreach($person->carers as $carer)
                                 @if($carer->title == 'Актер')
                                     <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
                                 @elseif($carer->title == 'Режиссер')
@@ -49,61 +49,38 @@
                                     <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-green">{{ $carer->title }}</span></a>
                                 @endif
                             @endforeach
-                          </a>
+                          </span>
                         </li>
                         <li class="list-group-item">
-                          <b>Following</b> <a class="pull-right">543</a>
+                          <b>День Рождение</b> <a class="pull-right">{{ $person->getDate() }}</a>
                         </li>
                         <li class="list-group-item">
                           <b>Friends</b> <a class="pull-right">13,287</a>
                         </li>
                       </ul>
 
-                      <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                      <a href="{{ route('persons.edit', $person->id) }}" class="btn btn-primary btn-block"><b>Редактировать</b></a>
                     </div>
                     <!-- /.box-body -->
                   </div>
                   <!-- /.box -->
 
                   <!-- About Me Box -->
-                  <div class="box box-primary">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">About Me</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                      <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                  {{--<div class="box box-primary">--}}
+                    {{--<div class="box-header with-border">--}}
+                      {{--<h3 class="box-title">Об {{ $person->name }}</h3>--}}
+                    {{--</div>--}}
+                    {{--<!-- /.box-header -->--}}
+                    {{--<div class="box-body">--}}
+                      {{--<strong><i class="fa fa-book margin-r-5"></i> Education</strong>--}}
 
-                      <p class="text-muted">
-                        B.S. in Computer Science from the University of Tennessee at Knoxville
-                      </p>
+                      {{--<p class="text-muted">--}}
+                        {{--B.S. in Computer Science from the University of Tennessee at Knoxville--}}
+                      {{--</p>--}}
 
-                      <hr>
-
-                      <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                      <p class="text-muted">Malibu, California</p>
-
-                      <hr>
-
-                      <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                      <p>
-                        <span class="label label-danger">UI Design</span>
-                        <span class="label label-success">Coding</span>
-                        <span class="label label-info">Javascript</span>
-                        <span class="label label-warning">PHP</span>
-                        <span class="label label-primary">Node.js</span>
-                      </p>
-
-                      <hr>
-
-                      <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                    </div>
-                    <!-- /.box-body -->
-                  </div>
+                    {{--</div>--}}
+                    {{--<!-- /.box-body -->--}}
+                  {{--</div>--}}
                   <!-- /.box -->
                 </div>
                 <!-- /.col -->
@@ -116,45 +93,15 @@
                     </ul>
                     <div class="tab-content">
                       <div class="active tab-pane" id="activity">
-                        <div class=" box-body table-responsive no-padding">
-                          <table class="table table-hover">
-                            <thead>
+                        <div class="clearfix">
+                          @foreach($person->films as $film)
+                            <div class="box-body box-profile col-xs-6 col-md-2">
+                              <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="{{ $film->getImage() }}" alt="User profile picture"></a>
 
-                            </thead>
-                            <tbody>
-                            <tr>
-                              <th style="width: 50px;padding-left: 15px;">ID</th>
-                              <th>Название</th>
-                              <th>Жанры</th>
+                              <h3 class="profile-username text-left">{{ $film->title }}</h3>
 
-                              <th></th>
-                            </tr>
-                            
-                            @foreach($actor->films as $film)
-                              <tr>
-                                <td style="padding-left: 15px;">{{ $film->id }}</td>
-                                <td><a href="{{ route('films.show', $film->slug)}}">{{ $film->title }}</a></td>
-                                <td>
-                                  @foreach($film->genres as $genre)
-                                    <a href="{{ route('genres.show', $genre->slug) }}"><span class="badge bg-yellow">{{ $genre->title }}</span></a>
-                                  @endforeach
-                                </td>
-                                
-
-                                <td width="150px">
-                                  <div class="form-inline">
-                                    <a class="form-inline" href="{{ route('films.edit', $film->id) }}">ред.</a>
-
-                                    {{ Form::open(['route' => ['films.destroy', $film->id], 'method' => 'delete', 'class' => 'form-group']) }}
-                                    <button onclick="return confirm('Удалить?')" class="btn btn-link">удалить</button>
-                                    {{ Form::close() }}
-                                  </div>
-                                </td>
-                              </tr>
-                            @endforeach
-
-                            </tbody>
-                          </table>
+                            </div>
+                          @endforeach
                         </div>
                       </div>
                       <!-- /.tab-pane -->

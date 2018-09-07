@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Actor;
+use App\Person;
 use App\Film;
 use App\Genre;
 use Illuminate\Support\ServiceProvider;
@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
         //
         view()->composer('admin._sidebar', function($view){
             $view->with('countFilms', Film::all()->count());
-            $view->with('countActors', count(Actor::all()));
+            $view->with('countPersons', count(Person::all()));
         });
 
     }

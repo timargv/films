@@ -32,8 +32,8 @@
                                             <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="../../img/iphone.jpg" alt="User profile picture"></a>
 
                                             <h3 class="profile-username text-left">{{ $film->title }}  @foreach($film->years as $year) - {{ $year->year }} @endforeach </h3>
-                                            @foreach($film->actors as $actor)
-                                                <a href="{{ route('actors.show', $actor->slug) }}">{{ $actor->name }}</a>,
+                                            @foreach($film->persons as $person)
+                                                <a href="{{ route('persons.show', $person->slug) }}">{{ $person->name }}</a>,
                                             @endforeach
                                             <hr>
                                             @foreach($film->directors as $director)

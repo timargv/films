@@ -14,7 +14,7 @@
 
         <!-- Main content -->
         <section class="content">
-            {{ Form::open(['route' => ['films.update', $film->id], 'files'	=>	true, 'method' => 'put'] )}}
+            {{ Form::open(['route' => ['films.update', $film->id], 'method' => 'put', 'files' => true ]) }}
             <div class="row">
                 <div class="col-md-3">
 
@@ -22,9 +22,12 @@
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <div class="thumbnail" style="border: 0; padding: 0; overflow: hidden">
-                                <img class="img-responsive " src="{{$film->getImage()}}" alt="User profile picture">
+                                <button type="submit" name="action" value="del" class="btn btn-default btn-block"><b>-</b></button>
+
+
+                                <img class="img-responsive " src="{{$film->getImage('original', '')}}" alt="User profile picture">
                                 <label for="exampleInputFile">Постер</label>
-                                <input type="file" id="exampleInputFile" name="poster_img">
+                                <input type="file" id="exampleInputFile" name="image">
                             </div>
 
                             <div class="btn-group " role="toolbar" style="width: 100%">
@@ -103,9 +106,9 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="form-group">
-                                {{Form::select('actors[]',
-                                  $actors,
-                                  $selectedActors,
+                                {{Form::select('persons[]',
+                                  $persons,
+                                  $selectedPersons,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
                                 }}
                             </div>
@@ -123,7 +126,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 {{Form::select('directors[]',
-                                  $actors,
+                                  $persons,
                                   $selectedDirectors,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Режиссера'])
                                 }}
@@ -142,7 +145,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 {{Form::select('writers[]',
-                                  $actors,
+                                  $persons,
                                   $selectedWriters,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Сценариста'])
                                 }}
@@ -161,7 +164,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 {{Form::select('operators[]',
-                                  $actors,
+                                  $persons,
                                   $selectedOperators,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Оператора'])
                                 }}
@@ -180,7 +183,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 {{Form::select('musicians[]',
-                                  $actors,
+                                  $persons,
                                   $selectedMusicians,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Композитора'])
                                 }}
@@ -199,7 +202,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 {{Form::select('artists[]',
-                                  $actors,
+                                  $persons,
                                   $selectedArtists,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Художника'])
                                 }}
@@ -218,7 +221,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 {{Form::select('mountings[]',
-                                  $actors,
+                                  $persons,
                                   $selectedMountings,
                                   ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Монтажера'])
                                 }}

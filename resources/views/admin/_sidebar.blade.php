@@ -6,7 +6,7 @@
         </a>
     </li>
 
-    <li class="{{{ (Request::is('admin/films*', 'admin/genres*', 'admin/actors*', 'admin/carers*', 'admin/years*', 'admin/countries*', 'admin/thematics*') ? 'treeview active' : 'treeview') }}}">
+    <li class="{{{ (Request::is('admin/films*', 'admin/genres*', 'admin/persons*', 'admin/carers*', 'admin/years*', 'admin/countries*', 'admin/thematics*') ? 'treeview active' : 'treeview') }}}">
       <a href="#">
         <i class="fa fa-film"></i>
         <span>Фильмы / Сериалы</span>
@@ -24,10 +24,10 @@
         <li><a href="#"><i class="fa fa-play"></i> <span>Сериалы</span></a></li>
         <li class="{{{ (Request::is('admin/genres*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('genres.index') }}"><i class="fa fa-align-justify"></i> <span>Жанры</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o"></i> <span>Возраст ограничение</span></a></li>
-        <li class="{{{ (Request::is('admin/actors*') ? 'treeview active' : 'treeview') }}}">
-            <a href="{{ route('actors.index') }}"><i class="fa fa-user"></i> <span>Актеры</span>
+        <li class="{{{ (Request::is('admin/persons*') ? 'treeview active' : 'treeview') }}}">
+            <a href="{{ route('persons.index') }}"><i class="fa fa-user"></i> <span>Персоны</span>
                 <span class="pull-right-container">
-                  <small class="label pull-right bg-green">{{ $countActors }}</small>
+                  <small class="label pull-right bg-green">{{ $countPersons }}</small>
                 </span>
             </a></li>
          <li class="{{{ (Request::is('admin/carers*') ? 'treeview active' : 'treeview') }}}"><a href="{{ route('carers.index') }}"><i class="fa fa-comment"></i> <span>Профессии</span></a></li>

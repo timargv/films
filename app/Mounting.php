@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Mounting extends Model
 {
-    protected $table = 'actors';
+    protected $table = 'persons';
 
     //-------------------
     public function films () {

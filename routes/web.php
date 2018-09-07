@@ -17,7 +17,7 @@ Route::get('/', function () {return view('welcome');});
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 
       Route::get('/', 'DashboardController@index');
-      Route::resource('actors', 'ActorsController');
+      Route::resource('persons', 'PersonsController');
       Route::resource('films', 	'FilmsController');
       Route::resource('genres', 'GenresController');
       Route::resource('countries', 'CountriesController');

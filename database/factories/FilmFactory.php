@@ -16,7 +16,7 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         'description'       => $faker->text('600'),
         'trailer_field'     => 'https://www.youtube.com/embed/IuLkvgavbK4',
         'video_field'       => 'https://www.youtube.com/embed/IuLkvgavbK4',
-        'poster_img'        => ''
+        'image'        => ''
 //        'slug'              => $faker->unique()
     ];
 });

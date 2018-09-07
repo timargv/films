@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(ActorsTableSeeder::class);
+         $this->call(PersonsTableSeeder::class);
          $this->call(GenresTableSeeder::class);
          $this->call(CarerTableSeeder::class);
          $this->call(FilmTableSeeder::class);
@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ThematicTableSeeder::class);
 
          for ($i = 1; $i < 11; $i++) {
-             DB::table('actor_carers')->insert([
-                 ['actor_id' => $i, 'carer_id' => rand(1, 2)],
-                 ['actor_id' => $i, 'carer_id' => rand(3, 4)],
-                 ['actor_id' => $i, 'carer_id' => rand(5, 6)],
-                 ['actor_id' => $i, 'carer_id' => rand(7, 8)],
+             DB::table('person_carers')->insert([
+                 ['person_id' => $i, 'carer_id' => rand(1, 2)],
+                 ['person_id' => $i, 'carer_id' => rand(3, 4)],
+                 ['person_id' => $i, 'carer_id' => rand(5, 6)],
+                 ['person_id' => $i, 'carer_id' => rand(7, 8)],
              ]);
          }
 
@@ -38,16 +38,16 @@ class DatabaseSeeder extends Seeder
         }
 
         for ($i = 1; $i < 50; $i++) {
-            DB::table('film_actors')->insert([
-                ['film_id' => $i, 'actor_id' => rand(1, 3)],
-                ['film_id' => $i, 'actor_id' => rand(4, 10)],
-                ['film_id' => $i, 'actor_id' => rand(11, 20)],
-                ['film_id' => $i, 'actor_id' => rand(11, 20)],
+            DB::table('film_persons')->insert([
+                ['film_id' => $i, 'person_id' => rand(1, 3)],
+                ['film_id' => $i, 'person_id' => rand(4, 10)],
+                ['film_id' => $i, 'person_id' => rand(11, 20)],
+                ['film_id' => $i, 'person_id' => rand(11, 20)],
 
-                ['film_id' => $i, 'actor_id' => rand(20, 25)],
-                ['film_id' => $i, 'actor_id' => rand(26, 30)],
-                ['film_id' => $i, 'actor_id' => rand(31, 35)],
-                ['film_id' => $i, 'actor_id' => rand(36, 40)],
+                ['film_id' => $i, 'person_id' => rand(20, 25)],
+                ['film_id' => $i, 'person_id' => rand(26, 30)],
+                ['film_id' => $i, 'person_id' => rand(31, 35)],
+                ['film_id' => $i, 'person_id' => rand(36, 40)],
             ]);
         }
 

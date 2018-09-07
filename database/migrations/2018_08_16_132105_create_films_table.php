@@ -23,14 +23,14 @@ class CreateFilmsTable extends Migration
             $table->integer('age')->nullable();
             $table->float('rating')->nullable();
             $table->string('time')->nullable();
-            $table->string('poster_img')->nullable();
+            $table->string('image')->nullable();
             $table->string('sh_description')->nullable();
             $table->text('description')->nullable();
             $table->text('trailer_field')->nullable();
             $table->text('video_field')->nullable();
             $table->string('slug');
 
-//            актеры            - actor_id
+//            актеры            - person_id
 //            жанры             - genre_id
 //            страна            - country_id
 //            год               - year_id

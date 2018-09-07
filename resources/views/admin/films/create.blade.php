@@ -25,7 +25,7 @@
                             <div class="box-body box-profile">
                                 <div class="thumbnail" style="border: 0; padding: 0; overflow: hidden">
                                     <label for="exampleInputFile">Постер</label>
-                                    <input type="file" id="exampleInputFile" name="poster_img">
+                                    <input type="file" id="exampleInputFile" name="image">
                                 </div>
 
                                 <div class="btn-group " role="toolbar" style="width: 100%">
@@ -104,8 +104,8 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="form-group">
-                                    {{Form::select('actors[]',
-                                      $actors,
+                                    {{Form::select('persons[]',
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
                                     }}
@@ -124,7 +124,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     {{Form::select('directors[]',
-                                      $actors,
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Режиссера'])
                                     }}
@@ -143,7 +143,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     {{Form::select('writers[]',
-                                      $actors,
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Сценариста'])
                                     }}
@@ -163,7 +163,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     {{Form::select('operators[]',
-                                      $actors,
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Оператора'])
                                     }}
@@ -182,7 +182,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     {{Form::select('musicians[]',
-                                      $actors,
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Композитора'])
                                     }}
@@ -201,7 +201,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     {{Form::select('artists[]',
-                                      $actors,
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Художника'])
                                     }}
@@ -220,7 +220,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     {{Form::select('mountings[]',
-                                      $actors,
+                                      $persons,
                                       null,
                                       ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Монтажера'])
                                     }}

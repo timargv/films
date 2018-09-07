@@ -60,9 +60,9 @@ class YearsController extends Controller
         $films = $year->films()->get();
 
         $film = Film::where('id', $year->id)->firstOrFail();
-        $actors = $film->actors()->get();
+        $persons = $film->persons()->get();
 
-        return view('admin.years.show', compact('year', 'films', 'actors'));
+        return view('admin.years.show', compact('year', 'films', 'persons'));
     }
 
     /**

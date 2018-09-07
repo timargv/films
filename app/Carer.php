@@ -11,12 +11,12 @@ class Carer extends Model
 
     protected $fillable = ['title', 'slug'];
 
-    public function actors () {
+    public function persons () {
         return $this->belongsToMany(
-            Actor::class,
-            'actor_carers',
+            Person::class,
+            'person_carers',
             'carer_id',            
-            'actor_id'
+            'person_id'
         );
     }
 
@@ -34,7 +34,7 @@ class Carer extends Model
     public function remove()
     {
         Carer::deleted(function ($carer) {
-            $carer->actors()->detach();
+            $carer->persons()->detach();
         });
         $this->delete();
     }

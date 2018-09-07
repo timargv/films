@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Country;
 use App\Film;
 use App\Genre;
-//use App\Actor;
+//use App\Person;
 use App\Related;
 use App\Thematic;
 use App\Year;
@@ -41,9 +41,9 @@ class FilmsController extends Controller
         $thematics   = Thematic::pluck('title', 'id')->all();
 
         $filmis = new Film();
-        $actors = $filmis->allAct($filmis);
+        $persons = $filmis->allPers($filmis);
 
-        return view('admin.films.create', compact('genres', 'actors', 'countries', 'relateds', 'years', 'thematics'));
+        return view('admin.films.create', compact('genres', 'persons', 'countries', 'relateds', 'years', 'thematics'));
     }
 
     /**
@@ -57,13 +57,14 @@ class FilmsController extends Controller
       
         $this->validate($request, [
             'title' => 'required',
-            'date'  => 'nullable'
+            'date'  => 'nullable',
+            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         $film = Film::add($request->all());
-        $film->uploadImage($request->file('poster_img'));
+        $film->uploadImage($request->file('image'));
         $film->setGenres($request->get('genres'));
-        $film->setActors($request->get('actors'));
+        $film->setPersons($request->get('persons'));
         $film->setDirectors($request->get('directors'));
         $film->setWriters($request->get('writers'));
         $film->setArtists($request->get('artists'));
@@ -94,18 +95,18 @@ class FilmsController extends Controller
     {
         /**/
         $film = Film::where('slug', $slug)->firstOrFail();
-//        $actor = Actor::where('id', $film->id)->firstOrFail();
-//        $actors = 'Актер';
-//        $actors = 'Режиссер';
-//        $actors = 'Сценарист';
-//        $actors = 'Продюсер';
-//        $actors = 'Оператор';
-//        $actors = 'Композитор';
-//        $actors = 'Художник';
-//        $actors = 'Монтажер';
+//        $person = Person::where('id', $film->id)->firstOrFail();
+//        $persons = 'Актер';
+//        $persons = 'Режиссер';
+//        $persons = 'Сценарист';
+//        $persons = 'Продюсер';
+//        $persons = 'Оператор';
+//        $persons = 'Композитор';
+//        $persons = 'Художник';
+//        $persons = 'Монтажер';
 
 
-        $actors     = $film->actors()->get();
+        $persons     = $film->persons()->get();
         $directors  = $film->directors()->get();
         $genres     = $film->genres()->get();
         $artists    = $film->artists()->get();
@@ -118,7 +119,7 @@ class FilmsController extends Controller
         $relateds   = $film->relateds()->get();
         $thematics  = $film->thematics()->get();
 
-        return view('admin.films.show', compact('film',  'actors', 'genres', 'directors', 'writers', 'artists','countries', 'mountings', 'musicians', 'operators', 'years', 'relateds', 'thematics'));
+        return view('admin.films.show', compact('film',  'persons', 'genres', 'directors', 'writers', 'artists','countries', 'mountings', 'musicians', 'operators', 'years', 'relateds', 'thematics'));
     }
 
     /**
@@ -139,10 +140,10 @@ class FilmsController extends Controller
 
 
         $filmis = new Film();
-        $actors = $filmis->allAct($filmis);
+        $persons = $filmis->allPers($filmis);
 
         $selectedGenres     = $film->genres->pluck('id')->all();
-        $selectedActors     = $film->actors->pluck('id')->all();
+        $selectedPersons     = $film->persons->pluck('id')->all();
         $selectedDirectors  = $film->directors->pluck('id')->all();
         $selectedWriters    = $film->writers->pluck('id')->all();
         $selectedArtists    = $film->artists->pluck('id')->all();
@@ -156,9 +157,9 @@ class FilmsController extends Controller
 
 
         return view('admin.films.edit', compact(
-            'film', 'actors', 'genres',  'countries',   'years', 'relateds', 'thematics',
+            'film', 'persons', 'genres',  'countries',   'years', 'relateds', 'thematics',
             'selectedGenres',
-            'selectedActors',
+            'selectedPersons',
             'selectedDirectors',
             'selectedWriters',
             'selectedArtists',
@@ -182,14 +183,14 @@ class FilmsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'image' => 'image'
         ]);
 
         $film = Film::find($id);
         $film->edit($request->all());
-        $film->uploadImage($request->file('poster_img'));
         $film->setGenres($request->get('genres'));
-        $film->setActors($request->get('actors'));
+        $film->setPersons($request->get('persons'));
         $film->setDirectors($request->get('directors'));
         $film->setWriters($request->get('writers'));
         $film->setArtists($request->get('artists'));
@@ -200,12 +201,24 @@ class FilmsController extends Controller
         $film->setYears($request->get('years'));
         $film->setRelateds($request->get('relateds'));
         $film->setThematics($request->get('thematics'));
+        $film->uploadImage($request->file('image'));
+
 
         if ($request->get('action') == 'save'){
+
             return redirect()->back();
+
         } elseif ($request->get('action') == 'saveAdd') {
+
             return redirect()->route('films.create');
+
+        } elseif ($request->get('action') == 'del') {
+
+            $film->removeImage($film->image);
+            return redirect()->route('films.edit', $film->id);
+
         } elseif ($request->get('action') == 'saveView') {
+
             return redirect()->route('films.show', $film->slug);
         }
         return redirect()->route('films.index');

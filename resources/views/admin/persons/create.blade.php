@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Список Контактов
+                Создание персонажа
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -19,7 +19,7 @@
                 <div class="box-header">
 
                 </div>
-                {{ Form::open(['route' => 'actors.store']) }}
+                {{ Form::open(['route' => 'persons.store']) }}
 
                 <div class=" box-body ">
 
@@ -39,6 +39,18 @@
                                 null, 
                                 ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Профессии'])
                               }}
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>День рождения </label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" id="datepicker" value="{{ old('date') }}" name="date">
+                                </div>
+
                             </div>
                             
                         </div>

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Musician extends Model
 {
-    protected $table = 'actors';
+    protected $table = 'persons';
 
     //-------------------
     public function films () {

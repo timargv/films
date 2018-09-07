@@ -32,13 +32,13 @@
 
                             <th></th>
                         </tr>
-                             @foreach($carer->actors as $actor)
+                             @foreach($carer->persons as $person)
                               <tr>
-                                <td style="padding-left: 15px;">{{ $actor->id }}</td>
-                                <td>{{ $actor->image }}</td>
-                                <td><a href="{{ route('carers.show', $actor->slug)}}">{{ $actor->name }}</a></td>
+                                <td style="padding-left: 15px;">{{ $person->id }}</td>
+                                <td>{{ $person->image }}</td>
+                                <td><a href="{{ route('carers.show', $person->slug)}}">{{ $person->name }}</a></td>
                                 <td>
-                                  @foreach($actor->carers as $carer)
+                                  @foreach($person->carers as $carer)
                                         @if($carer->title == 'Актер')
                                             <a href="{{ route('carers.show', $carer->slug) }}"><span class="badge bg-yellow">{{ $carer->title }}</span></a>
                                         @elseif($carer->title == 'Режиссер')
@@ -62,9 +62,9 @@
 
                                 <td width="150px">
                                   <div class="form-inline">
-                                    <a class="form-inline" href="{{ route('carers.edit', $actor->id) }}">ред.</a>
+                                    <a class="form-inline" href="{{ route('carers.edit', $person->id) }}">ред.</a>
 
-                                    {{ Form::open(['route' => ['actors.destroy', $actor->id], 'method' => 'delete', 'class' => 'form-group']) }}
+                                    {{ Form::open(['route' => ['persons.destroy', $person->id], 'method' => 'delete', 'class' => 'form-group']) }}
                                     <button onclick="return confirm('Удалить?')" class="btn btn-link">удалить</button>
                                     {{ Form::close() }}
                                   </div>
@@ -76,7 +76,7 @@
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-                    {{-- {{$actors->links()}} --}}
+                    {{-- {{$persons->links()}} --}}
                 </div>
             </div>
         </section>

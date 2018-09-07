@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ActorsTableSeeder extends Seeder
+class PersonsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class ActorsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Actor::class, 50)->create();
+        factory(\App\Person::class, 50)->create();
     }
 }

@@ -2,18 +2,17 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Jenssegers\Date\Date;
-
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 /**
  * @property \Carbon\Carbon $created_at
  * @property int $id
  * @property \Carbon\Carbon $updated_at
- * @property mixed $actors
+ * @property mixed $persons
  * @property mixed $genres
  * @property mixed $directors
  * @property mixed $writers
@@ -30,6 +29,8 @@ class Film extends Model
 
     use Sluggable;
 
+    protected $table = 'films';
+
     protected $fillable = [
         'title',
         'original_title',
@@ -39,7 +40,7 @@ class Film extends Model
         'age',
         'rating',
         'time',
-        'poster_img',
+        'image',
         'sh_description',
         'description',
         'video_field',
@@ -59,8 +60,8 @@ class Film extends Model
 
     // protected $guarded = ['id'];
 
-    public function allAct ($actrs) {
-        $lists = Actor::pluck('name', 'id')->all();
+    public function allPers ($person) {
+        $lists = Person::pluck('name', 'id')->all();
         return $lists;
     }
 
@@ -77,13 +78,13 @@ class Film extends Model
     }
 
     //-------------------
-    public function actors()
+    public function Persons()
     {
         return $this->belongsToMany(
-            Actor::class,
-            'film_actors',
+            Person::class,
+            'film_persons',
             'film_id',
-            'actor_id'
+            'person_id'
         );
     }
     public function directors() {
@@ -195,7 +196,7 @@ class Film extends Model
         Film::deleted(function ($film) {
 
             $film->genres()->detach();
-            $film->actors()->detach();
+            $film->persons()->detach();
             $film->directors()->detach();
             $film->writers()->detach();
             $film->artists()->detach();
@@ -215,32 +216,41 @@ class Film extends Model
     //-------------------
     public function removeImage()
     {
-        if($this->poster_img != null)
-        {
-            Storage::delete('uploads/films/' . $this->poster_img);
-        }
+        Storage::delete([
+            'uploads/films/original/' . $this->image,
+            'uploads/films/thumbnail/thumbnail_' . $this->image,
+        ]);
     }
 
     //-------------------
-    public function uploadImage($poster_img)
+    public function uploadImage($image)
     {
-        if($poster_img == null) { return; }
+        if($image == null) { return; }
         $this->removeImage();
-        $filename = str_random(18) . '.' . $poster_img->extension();
-        $poster_img->storeAs('uploads/films', $filename);
-        $this->poster_img = $filename;
+
+        $filename  = str_random(10) . '.' . $image->extension();
+//        $image->storeAs('uploads/persons/original', $filename);
+
+        $path = public_path('uploads/films/original/' . $filename);
+        $path_th = public_path('uploads/films/thumbnail/thumbnail_' . $filename);
+        Image::make($image)->widen(468)->save($path);
+        Image::make($image->getRealPath())->save($path_th);
+        $this->image = $filename;
         $this->save();
+
+
     }
 
     //-------------------
-    public function getImage()
+    public function getImage($value, $pre)
     {
-        if($this->poster_img == null)
+        if($this->image == null)
         {
             return '/uploads/films/no-image.jpg';
         }
-        return '/uploads/films/' . $this->poster_img;
+        return "/uploads/films/$value/$pre" . $this->image;
     }
+
 
 
     //---------------------------------------//
@@ -252,10 +262,10 @@ class Film extends Model
     }    
 
     //-------------------
-    public function setActors($ids)
+    public function setPersons($ids)
     {
         if ($ids === null) { return; }
-        $this->actors()->sync($ids);
+        $this->persons()->sync($ids);
     }
 
     //-------------------
@@ -331,10 +341,10 @@ class Film extends Model
 
 
     //-------------------
-    public function getActorsTitles()
+    public function getPersonsTitles()
     {
-        return (!$this->actors->isEmpty())
-            ?   implode(', ', $this->actors->pluck('name')->all())
+        return (!$this->persons->isEmpty())
+            ?   implode(', ', $this->persons->pluck('name')->all())
             :   'Нет Актера';
     }
 
@@ -348,22 +358,30 @@ class Film extends Model
     }
 
 
-    //-------------------
+    //------------------- DATE
     public function setDateAttribute($value)
     {
-        $date = Date::createFromFormat('d/m/y', $value)->format('Y-m-d');
-        $this->attributes['date'] = $date;
+        if (strlen($value)) {
+            $date = Date::createFromFormat('d/m/y', $value)->format('Y-m-d');
+            $this->attributes['date'] = $date;
+        }   $this->attributes['date'] = null;
     }
 
     public function getDateAttribute($value)
     {
-        $date = Date::createFromFormat('Y-m-d', $value)->format('d/m/y');
-        return $date;
+        Date::setLocale('ru');
+        if (strlen($value)) {
+            $date = Date::createFromFormat('Y-m-d', $value)->format('d/m/y');
+            return $date;
+        }   return null;
     }
 
     public function getDate()
     {
-        Date::setLocale('ru');
-        return Date::createFromFormat('d/m/y', $this->date)->format('d F, Y');
+        if (strlen($this->date)) {
+            return Date::createFromFormat('d/m/y', $this->date)->format('F d, Y' );
+        }   return null;
     }
+
+
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actor;
+use App\Person;
 use App\Film;
 use App\Genre;
 use Illuminate\Http\Request;
@@ -57,9 +57,9 @@ class GenresController extends Controller
         $films = $genre->films()->get();
 
         $film = Film::where('id', $genre->id)->firstOrFail();
-        $actors = $film->actors()->get();
+        $persons = $film->persons()->get();
 
-        return view('admin.genres.show', compact('genre', 'films', 'actors'));
+        return view('admin.genres.show', compact('genre', 'films', 'persons'));
     }
 
     /**
