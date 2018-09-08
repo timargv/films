@@ -22,7 +22,8 @@ class FilmsController extends Controller
      */
     public function index()
     {
-        $films = Film::orderBy('id', 'desc')->paginate(15);
+        $films = Film::paginate(15);
+//        $films = Film::orderBy('id', 'desc')->paginate(15);
 //        $films = DB::table('films')->orderBy('id', 'asc')->paginate(15);
         return view('admin.films.index', compact('films'));
     }
@@ -105,8 +106,7 @@ class FilmsController extends Controller
 //        $persons = 'Художник';
 //        $persons = 'Монтажер';
 
-
-        $persons     = $film->persons()->get();
+        $persons    = $film->persons()->get();
         $directors  = $film->directors()->get();
         $genres     = $film->genres()->get();
         $artists    = $film->artists()->get();

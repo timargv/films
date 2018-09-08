@@ -41,7 +41,9 @@ class ThematicsController extends Controller
         $this->validate($request, [
            'title' => 'required'
         ]);
-        Thematic::create($request->all());
+
+        $thematic = Thematic::add($request->all());
+        $thematic->uploadImage($request->file('image'));
         return redirect()->route('thematics.index');
     }
 
@@ -68,7 +70,8 @@ class ThematicsController extends Controller
      */
     public function edit($id)
     {
-        $thematic = Thematic::findOrFail($id);
+        $thematic = Thematic::find($id);
+//        dd($thematic);
         return view('admin.thematics.edit', compact('thematic'));
     }
 
@@ -82,12 +85,19 @@ class ThematicsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required'
+            'title' => 'required',
+            'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         $thematic = Thematic::find($id);
-        $thematic->update($request->all());
-        return redirect()->route('thematics.index');
+        $thematic->edit($request->all());
+
+        $thematic->uploadImage($request->file('image'));
+
+//        if ($request->get('action') == 'save'){
+            return redirect()->back();
+//        }
+//        return redirect()->route('thematics.index');
     }
 
     /**

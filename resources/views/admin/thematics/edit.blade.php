@@ -19,7 +19,29 @@
                 <div class="box-header">
 
                 </div>
-                {{ Form::open(['route' => ['thematics.update', $thematic->id], 'method' => 'put']) }}
+                {{ Form::open(['route' => ['thematics.update', $thematic->id], 'method' => 'put', 'files' => true ]) }}
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <div class="thumbnail" style="border: 0; padding: 0; overflow: hidden">
+                            <button type="submit" name="action" value="del" class="btn btn-default btn-block"><b>-</b></button>
+
+
+                            <img class="img-responsive " src="{{$thematic->getImage('original', '')}}" alt="User profile picture">
+
+
+                            <label for="exampleInputFile">Постер</label>
+                            <input type="file" id="exampleInputFile" name="image">
+                        </div>
+
+                        <div class="btn-group " role="toolbar" style="width: 100%">
+                            <button type="submit" name="action" value="save" class="btn btn-default btn-block"><b>Сохранить картинку</b></button>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
                 <div class=" box-body ">
 
                     <div class="">

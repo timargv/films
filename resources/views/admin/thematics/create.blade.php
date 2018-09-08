@@ -17,7 +17,10 @@
             <div class="box">
 
                 <div class="box-header">
-
+                    <div class="thumbnail" style="border: 0; padding: 0; overflow: hidden">
+                        <label for="exampleInputFile">Постер</label>
+                        <input type="file" id="exampleInputFile" name="image">
+                    </div>
                 </div>
                 {{ Form::open(['route' => 'thematics.store']) }}
 

@@ -13,6 +13,7 @@ use Intervention\Image\Facades\Image;
  * @property \Carbon\Carbon $created_at
  * @property int $id
  * @property \Carbon\Carbon $updated_at
+ * @property string image
  */
 class Person extends Model
 {
@@ -76,6 +77,7 @@ class Person extends Model
     //-------------------
     public function remove()
     {
+        $this->removeImage();
         Person::deleted(function ($person) {
             $person->carers()->detach();
             $person->films()->detach();
@@ -123,8 +125,8 @@ class Person extends Model
 
         $path = public_path('uploads/persons/original/' . $filename);
         $path_th = public_path('uploads/persons/thumbnail/thumbnail_' . $filename);
-        Image::make($image)->widen(468)->save($path);
-        Image::make($image->getRealPath())->save($path_th);
+        Image::make($image)->widen(468)->save($path_th);
+        Image::make($image->getRealPath())->save($path);
         $this->image = $filename;
         $this->save();
 

@@ -23,6 +23,7 @@ use Intervention\Image\Facades\Image;
  * @property mixed $years
  * @property mixed $operators
  * @property mixed $relateds
+ * @property mixed $thematics
  */
 class Film extends Model
 {
@@ -61,8 +62,8 @@ class Film extends Model
     // protected $guarded = ['id'];
 
     public function allPers ($person) {
-        $lists = Person::pluck('name', 'id')->all();
-        return $lists;
+        $person = Person::pluck('name', 'id')->all();
+        return $person;
     }
 
 

@@ -35,13 +35,13 @@
 
                             <th></th>
                         </tr>
-                        @foreach($thematics as $thematics)
+                        @foreach($thematics as $thematic)
                             <tr>
-                                <td style="padding-left: 15px;">{{ $thematics->id }}</td>
-                                <td><a href="{{ route('thematics.show', $thematics->slug)}}">
-                                        <span>{{ $thematics->title }}</span>
+                                <td style="padding-left: 15px;">{{ $thematic->id }}</td>
+                                <td><a href="{{ route('thematics.show', $thematic->slug)}}">
+                                        <span>{{ $thematic->title }}</span>
                                         <span class="pull-right-container">
-                                          <small class="label bg-green">{{ count($thematics->films) }}</small>
+                                          <small class="label bg-green">{{ count($thematic->films) }}</small>
                                         </span>
                                     </a>
 
@@ -50,9 +50,9 @@
 
                                 <td width="150px">
                                     <div class="form-inline">
-                                        <a class="form-inline" href="{{ route('thematics.edit', $thematics->id) }}">ред.</a>
+                                        <a class="form-inline" href="{{ route('thematics.edit', $thematic->id) }}">ред.</a>
 
-                                        {{ Form::open(['route' => ['thematics.destroy', $thematics->id], 'method' => 'delete', 'class' => 'form-group']) }}
+                                        {{ Form::open(['route' => ['thematics.destroy', $thematic->id], 'method' => 'delete', 'class' => 'form-group']) }}
                                         <button onclick="return confirm('Удалить?')" class="btn btn-link btn-xs">удалить</button>
                                         {{ Form::close() }}
                                     </div>
@@ -64,7 +64,7 @@
                     </table>
                 </div>
                 <div class="box-footer clearfix">
-{{--                    {{ $thematics->links() }}--}}
+                    {{ $thematics->links() }}
                 </div>
             </div>
         </section>

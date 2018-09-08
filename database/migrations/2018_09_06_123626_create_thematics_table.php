@@ -16,6 +16,7 @@ class CreateThematicsTable extends Migration
         Schema::create('thematics', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('image')->nullable();;
             $table->string('description')->nullable();
             $table->string('slug');
             $table->timestamps();

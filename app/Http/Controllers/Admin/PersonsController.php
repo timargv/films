@@ -31,9 +31,6 @@ class PersonsController extends Controller
             'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
-
-
-
         $person = Person::add($request->all());
         $person->uploadImage($request->file('image'));
         $person->setCarers($request->get('carers'));
@@ -68,7 +65,7 @@ class PersonsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'image' => 'image'
+            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
 
         ]);
 
