@@ -20,7 +20,7 @@
                   <!-- Profile Image -->
                   <div class="box box-primary">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="{{ $person->getImage() }}" alt="User profile picture" height="150px">
+                      <img class="profile-user-img img-responsive img-circle" src="{{ $person->getImage('original', '') }}" alt="User profile picture" height="150px">
 
                       <h3 class="profile-username text-center">{{ $person->name }}</h3>
 
@@ -96,7 +96,7 @@
                         <div class="clearfix">
                           @foreach($person->films as $film)
                             <div class="box-body box-profile col-xs-6 col-md-2">
-                              <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="{{ $film->getImage() }}" alt="User profile picture"></a>
+                              <a class="thumbnail" style="border: 0; padding: 0; overflow: hidden" href="{{ route('films.show', $film->slug) }}"><img class="img-responsive " src="{{ $film->getImage('original', '') }}" alt="User profile picture"></a>
 
                               <h3 class="profile-username text-left">{{ $film->title }}</h3>
 
