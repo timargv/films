@@ -38,7 +38,7 @@ class PersonsController extends Controller
         if ($request->get('action') == 'save'){
             return redirect()->back();
         } elseif ($request->get('action') == 'saveView') {
-            return redirect()->route('persons.show', $person->id);
+            return redirect()->route('persons.show', $person->slug);
         }
         return redirect(route('persons.index'));
     }
@@ -74,10 +74,15 @@ class PersonsController extends Controller
         $person->uploadImage($request->file('image'));
         $person->setCarers($request->get('carers'));
 
+
         if ($request->get('action') == 'save'){
-            return redirect()->back();
+
+            return redirect()->route('persons.index');
+
         } elseif ($request->get('action') == 'saveView') {
+
             return redirect()->route('persons.show', $person->slug);
+
         }
 
         return redirect()->route('persons.index');

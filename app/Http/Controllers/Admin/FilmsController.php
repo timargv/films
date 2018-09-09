@@ -6,11 +6,13 @@ use App\Country;
 use App\Film;
 use App\Genre;
 //use App\Person;
+use App\Person;
 use App\Related;
 use App\Thematic;
 use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 
 class FilmsController extends Controller
@@ -33,7 +35,7 @@ class FilmsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $genres     = Genre::pluck('title', 'id')->all();
         $years      = Year::pluck('year', 'id')->all();
@@ -44,7 +46,9 @@ class FilmsController extends Controller
         $filmis = new Film();
         $persons = $filmis->allPers($filmis);
 
-        return view('admin.films.create', compact('genres', 'persons', 'countries', 'relateds', 'years', 'thematics'));
+
+
+        return view('admin.films.create',  compact('genres', 'persons', 'countries', 'relateds', 'years', 'thematics'));
     }
 
     /**
@@ -242,5 +246,17 @@ class FilmsController extends Controller
         Film::findOrFail($id)->delete();
         return redirect()->back();
     }
+
+
+    public function loadData(Request $request)
+    {
+        if ($request->has('q')) {
+            $search = $request->q;
+            $data = DB::table('persons')->select('id', 'name')->where('name', 'LIKE', '%'.$search.'%')->get();
+            return response()->json($data);
+        }
+    }
+
+
 
 }

@@ -77,7 +77,7 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            <a href="{{ URL::previous() }} " class="btn btn-danger">Выйти</a>
+                            <a href="{{ route('persons.index') }} " class="btn btn-danger">Выйти</a>
                             <button  class="btn btn-primary">Сохранить</button>
                             <button type="submit" name="action" value="saveView" class="btn btn-default ">Сохранить и Посмотреть</button>
                         </div>

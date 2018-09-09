@@ -430,7 +430,31 @@
 
 <script src="/js/admin.js"></script>
 <script type="text/javascript" async src="//moonwalk.co/player_api?trailer=1&trailer_width=575&trailer_height=315"></script>
-  
+
+
+<script type="text/javascript">
+    $('.cari').select2({
+        placeholder: 'Cari...',
+        ajax: {
+            url: 'films/search',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results:  $.map(data, function (item) {
+                        return {
+                            text: item.name,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+</script>
+
 </body>
 
 <!-- Mirrored from almsaeedstudio.com/themes/AdminLTE/pages/examples/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 18 Dec 2016 15:13:35 GMT -->

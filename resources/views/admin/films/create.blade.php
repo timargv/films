@@ -3,7 +3,7 @@
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="app">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -107,9 +107,12 @@
                                     {{Form::select('persons[]',
                                       $persons,
                                       null,
-                                      ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
+                                      ['class' => 'form-control select2 country', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
                                     }}
                                 </div>
+                                sasas
+                                <select class="select2 cari form-control" style="width:100%;" name="cari"></select>
+
                             </div>
                             <!-- /.box-body -->
                         </div>
@@ -404,4 +407,6 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+
 @endsection

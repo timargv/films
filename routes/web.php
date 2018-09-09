@@ -25,4 +25,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::resource('carers', 'CarersController');
       Route::resource('thematics', 'ThematicsController');
 
+      Route::get('films/search', 'FilmsController@loadData');
+
 });
