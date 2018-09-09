@@ -86,18 +86,18 @@ class ThematicsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         $thematic = Thematic::find($id);
         $thematic->edit($request->all());
 
-        $thematic->uploadImage($request->file('image'));
+        $thematic->uploadAvatar($request->file('image'));
 
 //        if ($request->get('action') == 'save'){
-            return redirect()->back();
+//            return redirect()->back();
 //        }
-//        return redirect()->route('thematics.index');
+        return redirect()->route('thematics.index');
     }
 
     /**

@@ -14,7 +14,7 @@
 
         <!-- Main content -->
         <section class="content">
-            {{ Form::open(['route' => ['films.update', $film->id], 'method' => 'put', 'files' => true ]) }}
+            {!!  Form::open(['route' => ['films.update', $film->id], 'method' => 'put', 'files' => true ])  !!}
             <div class="row">
                 <div class="col-md-3">
 
@@ -392,7 +392,7 @@
                     </div>
                 </div>
             </div>
-            {{ Form::close() }}
+            {!!  Form::close()  !!}
 
         </section>
         <!-- /.content -->

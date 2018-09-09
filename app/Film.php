@@ -41,13 +41,35 @@ class Film extends Model
         'age',
         'rating',
         'time',
-        'image',
+      //  'image',
         'sh_description',
         'description',
         'video_field',
         'trailer_field',
         'slug'
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        Film::deleted(function ($film) {
+            $film->genres()->detach();
+            $film->persons()->detach();
+            $film->directors()->detach();
+            $film->writers()->detach();
+            $film->artists()->detach();
+            $film->countries()->detach();
+            $film->mountings()->detach();
+            $film->musicians()->detach();
+            $film->operators()->detach();
+            $film->years()->detach();
+            $film->relateds()->detach();
+            $film->thematics()->detach();
+
+            $film->removePoster();
+        });
+    }
 
     //-------------------
     public function sluggable()
@@ -191,66 +213,29 @@ class Film extends Model
     }
 
     //-------------------
-    public function remove()
-    {
-        $this->removeImage();
-        Film::deleted(function ($film) {
-
-            $film->genres()->detach();
-            $film->persons()->detach();
-            $film->directors()->detach();
-            $film->writers()->detach();
-            $film->artists()->detach();
-            $film->countries()->detach();
-            $film->mountings()->detach();
-            $film->musicians()->detach();
-            $film->operators()->detach();
-            $film->years()->detach();
-            $film->relateds()->detach();
-            $film->thematics()->detach();
-
-        });
-
-        $this->delete();
-    }
-
-    //-------------------
-    public function removeImage()
-    {
-        Storage::delete([
-            'uploads/films/original/' . $this->image,
-            'uploads/films/thumbnail/thumbnail_' . $this->image,
-        ]);
-    }
-
-    //-------------------
-    public function uploadImage($image)
-    {
-        if($image == null) { return; }
-        $this->removeImage();
-
-        $filename  = str_random(10) . '.' . $image->extension();
-//        $image->storeAs('uploads/persons/original', $filename);
-
-        $path = public_path('uploads/films/original/' . $filename);
-        $path_th = public_path('uploads/films/thumbnail/thumbnail_' . $filename);
-        Image::make($image)->widen(468)->save($path);
-        Image::make($image->getRealPath())->save($path_th);
-        $this->image = $filename;
-        $this->save();
+//    public function remove()
+//    {
+//        Film::deleted(function ($film) {
+//
+//            $film->genres()->detach();
+//            $film->persons()->detach();
+//            $film->directors()->detach();
+//            $film->writers()->detach();
+//            $film->artists()->detach();
+//            $film->countries()->detach();
+//            $film->mountings()->detach();
+//            $film->musicians()->detach();
+//            $film->operators()->detach();
+//            $film->years()->detach();
+//            $film->relateds()->detach();
+//            $film->thematics()->detach();
+//
+//        });
+//        $this->removePoster();
+//        $this->delete();
+//    }
 
 
-    }
-
-    //-------------------
-    public function getImage($value, $pre)
-    {
-        if($this->image == null)
-        {
-            return '/uploads/films/no-image.jpg';
-        }
-        return "/uploads/films/$value/$pre" . $this->image;
-    }
 
 
 
@@ -384,5 +369,43 @@ class Film extends Model
         }   return null;
     }
 
+
+    //-------------------
+    public function removeImage()
+    {
+        Storage::delete([
+            'uploads/films/original/' . $this->image,
+            'uploads/films/thumbnail/thumbnail_' . $this->image,
+        ]);
+    }
+
+    //-------------------
+    public function uploadImage($image)
+    {
+        if($image == null) { return; }
+        $this->removeImage();
+
+        $filename  = str_random(10) . '.' . $image->extension();
+//        $image->storeAs('uploads/persons/original', $filename);
+
+        $path = public_path('uploads/films/original/' . $filename);
+        $path_th = public_path('uploads/films/thumbnail/thumbnail_' . $filename);
+        Image::make($image)->widen(468)->save($path_th);
+        Image::make($image->getRealPath())->save($path);
+        $this->image = $filename;
+        $this->save();
+
+
+    }
+
+    //-------------------
+    public function getImage($value, $pre)
+    {
+        if($this->image == null)
+        {
+            return '/uploads/films/no-image.jpg';
+        }
+        return "/uploads/films/$value/$pre" . $this->image;
+    }
 
 }

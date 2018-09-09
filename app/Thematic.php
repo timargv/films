@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
+/**
+ * @property string image
+ */
 class Thematic extends Model
 {
     //
@@ -60,15 +63,15 @@ class Thematic extends Model
         $this->delete();
     }
 
-    //-------------------
-    public function removeImage()
-    {
-        $this->removeImage();
-        Storage::delete([
-            'uploads/thematics/original/' . $this->image,
-            'uploads/thematics/thumbnail/thumbnail_' . $this->image,
-        ]);
-    }
+//    //-------------------
+//    public function removeImage()
+//    {
+//        $this->removeImage();
+//        Storage::delete([
+//            'uploads/thematics/original/' . $this->image,
+//            'uploads/thematics/thumbnail/thumbnail_' . $this->image,
+//        ]);
+//    }
 
     //-------------------
     public function uploadImage($image)
@@ -90,19 +93,84 @@ class Thematic extends Model
 
         $this->removeImage();
         $filename = str_random(10) . '.' . $image->extension();
+        $image->storeAs('uploads/thematics/original', $filename);
+        $this->image = $filename;
+        $this->save();
+    }
+
+//    //-------------------
+//    public function getImage($value, $pre)
+//    {
+//        if($this->image == null)
+//        {
+//            return '/uploads/thematics/no-image.jpg';
+//        }
+//        return "/uploads/thematics/$value/$pre" . $this->image;
+//    }
+
+
+
+    //-------------------
+    public function removeImage()
+    {
+        if($this->image != null)
+        {
+            Storage::delete('uploads/thematics/' . $this->image);
+        }
+    }
+
+    //-------------------
+//    public function uploadImage($image)
+//    {
+//        if($image == null) { return; }
+//
+//        $this->removeImage();
+//        $filename = str_random(10) . '.' . $image->extension();
+//        $image->storeAs('uploads', $filename);
+//        $this->image = $filename;
+//        $this->save();
+//    }
+
+    //-------------------
+//    public function getImage()
+//    {
+//        if($this->image == null)
+//        {
+//            return '/uploads/thematics/no-image.jpg';
+//        }
+//
+//        return "/uploads/thematics/" . $this->image;
+//
+//    }
+
+    public function uploadAvatar($image)
+    {
+        if($image == null) { return; }
+
+        $this->removeAvatar();
+
+        $filename = str_random(10) . '.' . $image->extension();
         $image->storeAs('uploads', $filename);
         $this->image = $filename;
         $this->save();
     }
 
-    //-------------------
-    public function getImage($value, $pre)
+    public function removeAvatar()
+    {
+        if($this->image!= null)
+        {
+            Storage::delete('uploads/' . $this->image);
+        }
+    }
+
+    public function getImage()
     {
         if($this->image == null)
         {
-            return '/uploads/thematics/no-image.jpg';
+            return '/img/no-image.png';
         }
-        return "/uploads/thematics/$value/$pre" . $this->image;
+
+        return '/uploads/' . $this->image;
     }
 
 }

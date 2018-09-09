@@ -11,7 +11,7 @@ use App\Thematic;
 use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+
 
 class FilmsController extends Controller
 {
@@ -53,6 +53,7 @@ class FilmsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
       
@@ -63,7 +64,7 @@ class FilmsController extends Controller
         ]);
 
         $film = Film::add($request->all());
-        $film->uploadImage($request->file('image'));
+        $film->uploadPoster($request->file('image'));
         $film->setGenres($request->get('genres'));
         $film->setPersons($request->get('persons'));
         $film->setDirectors($request->get('directors'));
@@ -95,6 +96,7 @@ class FilmsController extends Controller
     public function show($slug)
     {
         /**/
+
         $film = Film::where('slug', $slug)->firstOrFail();
 //        $person = Person::where('id', $film->id)->firstOrFail();
 //        $persons = 'Актер';
@@ -143,7 +145,7 @@ class FilmsController extends Controller
         $persons = $filmis->allPers($filmis);
 
         $selectedGenres     = $film->genres->pluck('id')->all();
-        $selectedPersons     = $film->persons->pluck('id')->all();
+        $selectedPersons    = $film->persons->pluck('id')->all();
         $selectedDirectors  = $film->directors->pluck('id')->all();
         $selectedWriters    = $film->writers->pluck('id')->all();
         $selectedArtists    = $film->artists->pluck('id')->all();
@@ -180,6 +182,8 @@ class FilmsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -201,26 +205,29 @@ class FilmsController extends Controller
         $film->setYears($request->get('years'));
         $film->setRelateds($request->get('relateds'));
         $film->setThematics($request->get('thematics'));
+
+
         $film->uploadImage($request->file('image'));
 
+//        dd($request->all());
 
-        if ($request->get('action') == 'save'){
-
-            return redirect()->back();
-
-        } elseif ($request->get('action') == 'saveAdd') {
-
-            return redirect()->route('films.create');
-
-        } elseif ($request->get('action') == 'del') {
-
-            $film->removeImage($film->image);
-            return redirect()->route('films.edit', $film->id);
-
-        } elseif ($request->get('action') == 'saveView') {
-
-            return redirect()->route('films.show', $film->slug);
-        }
+//        if ($request->get('action') == 'save'){
+//
+//            return redirect()->back();
+//
+//        } elseif ($request->get('action') == 'saveAdd') {
+//
+//            return redirect()->route('films.create');
+//
+//        } elseif ($request->get('action') == 'del') {
+//
+//            $film->uploadPoster($film->image);
+//            return redirect()->route('films.edit', $film->id);
+//
+//        } elseif ($request->get('action') == 'saveView') {
+//
+//            return redirect()->route('films.show', $film->slug);
+//        }
         return redirect()->route('films.index');
     }
 
@@ -232,7 +239,8 @@ class FilmsController extends Controller
      */
     public function destroy($id)
     {
-        Film::findOrFail($id)->remove();
+        Film::findOrFail($id)->delete();
         return redirect()->back();
     }
+
 }
