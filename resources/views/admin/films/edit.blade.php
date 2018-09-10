@@ -41,6 +41,7 @@
 
 
 
+                    <div>
                     <!-- About Me Box -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -109,9 +110,10 @@
                                 {{Form::select('persons[]',
                                   $persons,
                                   $selectedPersons,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
+                                  ['class' => 'form-control select2', 'id' => 'tag_list', 'multiple'=>'multiple','data-placeholder'=>'Выберите Актера'])
                                 }}
                             </div>
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -269,6 +271,8 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
+
+                </div>
 
                 </div>
                 <div class="col-md-9">

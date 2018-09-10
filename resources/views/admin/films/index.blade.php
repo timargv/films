@@ -13,15 +13,32 @@
 
         <!-- Main content -->
         <section class="content">
+
+
+
+
+
             <div class="box">
 
                 <div class="box-header">
 
-                    <div class="">
+                    <div class="pull-left">
                         <a class="btn btn-primary btn-sm" href="{{ route('films.create') }}"><i class="fa fa-plus"></i> &nbsp; Добавить</a>
+                        <a class="btn btn-default btn-sm" href="{{ route('films.export') }}"><i class="fa fa-download"></i> &nbsp; Export</a>
+
                     </div>
 
+                    <div class="pull-right">
+                        <form class="form-inline" method="post" action="{{ route('films.import') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <input type="file" name="file" id="exampleInputFile" class="input-group">
+                            </div>
+                            <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-upload"></i> Import</button>
+                        </form>
+                    </div>
                     <p></p>
+                    <div class="clearfix"></div>
                 </div>
                 <div class=" box-body table-responsive no-padding">
                     <table class="table table-hover">

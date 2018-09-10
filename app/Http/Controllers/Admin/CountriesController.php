@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CountriesController extends Controller
 {
@@ -85,5 +86,14 @@ class CountriesController extends Controller
     {
         Country::findOrFail($id)->remove();
         return redirect()->back();
+    }
+
+    public  function export() {
+        $country = Country::select('id', 'country')->get();
+        return Excel::create('Экспорт Стран', function ($excel) use($country) {
+            $excel->sheet('mysheet', function ($sheet) use ($country) {
+                $sheet->fromArray($country);
+            });
+        })->export('xlsx');
     }
 }

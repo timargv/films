@@ -429,14 +429,35 @@
 
 
 <script src="/js/admin.js"></script>
-<script type="text/javascript" async src="//moonwalk.co/player_api?trailer=1&trailer_width=575&trailer_height=315"></script>
 
+{{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>--}}
 
 <script type="text/javascript">
-    $('.cari').select2({
-        placeholder: 'Cari...',
+//    $('').select2({
+//        placeholder: "Choose tags...",
+//        minimumInputLength: 2,
+//        ajax: {
+//            url: '/films/create/find',
+//            dataType: 'json',
+//            data: function (params) {
+//                return {
+//                    q: $.trim(params.term)
+//                };
+//            },
+//            processResults: function (data) {
+//                return {
+//                    results: data
+//                };
+//            },
+//            cache: true
+//        }
+//    });
+
+    $('#tag_list').select2({
+        placeholder: 'Select an item',
         ajax: {
-            url: 'films/search',
+            url: '/admin/films/find',
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -454,6 +475,7 @@
     });
 
 </script>
+{{--<script type="text/javascript" async src="//moonwalk.co/player_api?trailer=1&trailer_width=575&trailer_height=315"></script>--}}
 
 </body>
 

@@ -13,6 +13,7 @@ use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class FilmsController extends Controller
@@ -48,7 +49,24 @@ class FilmsController extends Controller
 
 
 
-        return view('admin.films.create',  compact('genres', 'persons', 'countries', 'relateds', 'years', 'thematics'));
+        return view('admin.films.create',  compact('genres',
+            'persons',
+            'countries', 'relateds', 'years', 'thematics'));
+    }
+
+    public function find(Request $request)
+    {
+        $data = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $data = DB::table("persons")
+                ->select("id","name")
+                ->where('name','LIKE',"%$search%")
+                ->get();
+        }
+
+        return response()->json($data);
     }
 
     /**
@@ -63,8 +81,6 @@ class FilmsController extends Controller
       
         $this->validate($request, [
             'title' => 'required',
-            'date'  => 'nullable',
-            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         $film = Film::add($request->all());
@@ -162,6 +178,7 @@ class FilmsController extends Controller
         $selectedThematics  = $film->thematics->pluck('id')->all();
 
 
+
         return view('admin.films.edit', compact(
             'film', 'persons', 'genres',  'countries',   'years', 'relateds', 'thematics',
             'selectedGenres',
@@ -179,6 +196,8 @@ class FilmsController extends Controller
         ));
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -192,7 +211,6 @@ class FilmsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'image' => 'image'
         ]);
 
         $film = Film::find($id);
@@ -248,15 +266,29 @@ class FilmsController extends Controller
     }
 
 
-    public function loadData(Request $request)
-    {
-        if ($request->has('q')) {
-            $search = $request->q;
-            $data = DB::table('persons')->select('id', 'name')->where('name', 'LIKE', '%'.$search.'%')->get();
-            return response()->json($data);
+
+    public function import(Request $request) {
+        $this->validate($request, [
+            'file' => 'required',
+        ]);
+        $path = $request->file('file')->getRealPath();
+        $data = Excel::load($path, function($reader) {})->get();
+        if(!empty($data) && $data->count()) {
+            foreach ($data as $key => $value) {
+                $attributes = $value->only('title', 'image', 'time', 'description')->toArray();
+                Film::create($attributes);
+                }
         }
+        return redirect()->route('films.index');
     }
 
-
+    public  function export() {
+        $films = Film::select('id', 'title')->get();
+        return Excel::create('Экспорт Фильмы', function ($excel) use($films) {
+            $excel->sheet('mysheet', function ($sheet) use ($films) {
+                $sheet->fromArray($films);
+            });
+        })->export('xlsx');
+    }
 
 }

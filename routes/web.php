@@ -19,12 +19,24 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::get('/', 'DashboardController@index');
       Route::resource('persons', 'PersonsController');
       Route::resource('films', 	'FilmsController');
+
+
+
+
       Route::resource('genres', 'GenresController');
       Route::resource('countries', 'CountriesController');
       Route::resource('years', 'YearsController');
       Route::resource('carers', 'CarersController');
       Route::resource('thematics', 'ThematicsController');
 
-      Route::get('films/search', 'FilmsController@loadData');
+    Route::get('films/find', 'FilmsController@find')->name('films.find');
+
+    Route::get('films-export', 'FilmsController@export')->name('films.export');
+    Route::post('films/import', 'FilmsController@import')->name('films.import');
+
+
+    Route::get('years-export', 'YearsController@export')->name('years.export');
+    Route::get('countries-export', 'CountriesController@export')->name('countries.export');
+
 
 });

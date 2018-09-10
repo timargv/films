@@ -7,6 +7,7 @@ use App\Related;
 use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class YearsController extends Controller
 {
@@ -99,6 +100,17 @@ class YearsController extends Controller
         //
         Year::findOrFail($id)->remove();
         return back();
+    }
+
+
+
+    public  function export() {
+        $year = Year::select('id', 'year')->get();
+        return Excel::create('Экспорт Year', function ($excel) use($year) {
+            $excel->sheet('mysheet', function ($sheet) use ($year) {
+                $sheet->fromArray($year);
+            });
+        })->export('xlsx');
     }
 
 

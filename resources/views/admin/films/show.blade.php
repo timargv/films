@@ -144,7 +144,9 @@
                                     Трейлер
                                 </div>
                                 <div class="box-body">
-                                    <iframe width="575" height="315" src="{{ $film->trailer_field }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    @if($film->trailer_field)
+                                        <iframe width="575" height="315" src="{{ $film->trailer_field }}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    @endif
                                 </div>
                             </div>
                         </div>

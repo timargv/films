@@ -37,6 +37,20 @@
                         </div>
                         <!-- /.box -->
 
+                        <!-- About Me Box -->
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Год</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="form-group">
+                                 <select style="max-width: 100%" id="tag_list" name="persons[]" class="form-control select2" multiple></select>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
 
 
                         <!-- About Me Box -->
@@ -111,7 +125,7 @@
                                     }}
                                 </div>
                                 sasas
-                                <select class="select2 cari form-control" style="width:100%;" name="cari"></select>
+
 
                             </div>
                             <!-- /.box-body -->
