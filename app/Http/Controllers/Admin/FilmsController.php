@@ -215,23 +215,23 @@ class FilmsController extends Controller
 
 //        dd($request->all());
 
-//        if ($request->get('action') == 'save'){
-//
-//            return redirect()->back();
-//
-//        } elseif ($request->get('action') == 'saveAdd') {
-//
-//            return redirect()->route('films.create');
-//
+        if ($request->get('action') == 'save'){
+
+            return redirect()->back();
+
+        } elseif ($request->get('action') == 'saveAdd') {
+
+            return redirect()->route('films.create');
+
 //        } elseif ($request->get('action') == 'del') {
 //
 //            $film->uploadPoster($film->image);
 //            return redirect()->route('films.edit', $film->id);
-//
-//        } elseif ($request->get('action') == 'saveView') {
-//
-//            return redirect()->route('films.show', $film->slug);
-//        }
+
+        } elseif ($request->get('action') == 'saveView') {
+
+            return redirect()->route('films.show', $film->slug);
+        }
         return redirect()->route('films.index');
     }
 

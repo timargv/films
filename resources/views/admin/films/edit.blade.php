@@ -22,7 +22,7 @@
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <div class="thumbnail" style="border: 0; padding: 0; overflow: hidden">
-                                <button type="submit" name="action" value="del" class="btn btn-default btn-block"><b>-</b></button>
+                                {{--<button type="submit" name="action" value="del" class="btn btn-default btn-block"><b>-</b></button>--}}
 
 
                                 <img class="img-responsive " src="{{$film->getImage('original', '')}}" alt="User profile picture">
