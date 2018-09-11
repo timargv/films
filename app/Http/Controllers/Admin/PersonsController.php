@@ -94,4 +94,14 @@ class PersonsController extends Controller
         Person::findOrFail($id)->remove();
         return redirect()->back();
     }
+
+
+    public  function export() {
+        $person = Person::select('id', 'name')->get();
+        return Excel::create('Экспорт Year', function ($excel) use($person) {
+            $excel->sheet('mysheet', function ($sheet) use ($person) {
+                $sheet->fromArray($person);
+            });
+        })->export('xlsx');
+    }
 }

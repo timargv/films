@@ -19,15 +19,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::get('/', 'DashboardController@index');
       Route::resource('persons', 'PersonsController');
       Route::resource('films', 	'FilmsController');
-
-
-
-
       Route::resource('genres', 'GenresController');
       Route::resource('countries', 'CountriesController');
       Route::resource('years', 'YearsController');
       Route::resource('carers', 'CarersController');
       Route::resource('thematics', 'ThematicsController');
+
+
 
     Route::get('films/find', 'FilmsController@find')->name('films.find');
 
@@ -37,6 +35,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
 
     Route::get('years-export', 'YearsController@export')->name('years.export');
     Route::get('countries-export', 'CountriesController@export')->name('countries.export');
+    Route::get('persons-export', 'PersonsController@export')->name('persons.export');
 
 
 });

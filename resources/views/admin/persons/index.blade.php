@@ -19,6 +19,7 @@
 
                     <div class="">
                         <a class="btn btn-primary btn-sm" href="{{ route('persons.create') }}"><i class="fa fa-plus"></i> &nbsp; Добавить</a>
+                        <a class="btn btn-default btn-sm" href="{{ route('persons.export') }}"><i class="fa fa-download"></i>  Export</a>
                     </div>
 
                     <p></p>
