@@ -20,11 +20,11 @@
                   <!-- Profile Image -->
                   <div class="box box-primary">
                     <div class="box-body box-profile">
-                      <img class="profile-user-img img-responsive img-circle" src="{{ $person->getImage('original', '') }}" alt="User profile picture" height="150px">
+                      <img class="profile-user-img img-responsive img-circle" src="{{ $person->getImage('original', '') }}" alt="User profile picture" style="margin: 0 auto;width: 110px;max-height: initial;padding: 3px;border: 0;border-radius: 0;">
 
                       <h3 class="profile-username text-center">{{ $person->name }}</h3>
 
-                      <p class="text-muted text-center">Software Engineer</p>
+                      <p class="text-muted text-center">{{ $person->name_original }}</p>
 
                       <ul class="list-group list-group-unbordered">
                         <li class="list-group-item clearfix">
@@ -52,11 +52,16 @@
                           </span>
                         </li>
                         <li class="list-group-item">
-                          <b>День Рождение</b> <a class="pull-right">{{ $person->getDate() }}</a>
+                          {{--<b>День Рождение</b> <a class="pull-right">{{ $person->getDate() }}</a>--}}
+                          <b>День Рождение</b> <a class="pull-right">{{ $person->date }}</a>
                         </li>
                         <li class="list-group-item">
-                          <b>Friends</b> <a class="pull-right">13,287</a>
+                          <b>Место рождения</b> <a class="pull-right">{{ $person->birthplace }}</a>
                         </li>
+                          <li class="list-group-item">
+                              <b>Рост</b> <a class="pull-right">{{ $person->stature }}</a>
+                          </li>
+
                       </ul>
 
                       <a href="{{ route('persons.edit', $person->id) }}" class="btn btn-primary btn-block"><b>Редактировать</b></a>
@@ -89,7 +94,7 @@
                     <ul class="nav nav-tabs">
                       <li class="active"><a href="#activity" data-toggle="tab">Фильмы</a></li>
                       <li><a href="#timeline" data-toggle="tab">Сериалы</a></li>
-                      <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                      <li><a href="#settings" data-toggle="tab">Изменить</a></li>
                     </ul>
                     <div class="tab-content">
                       <div class="active tab-pane" id="activity">
@@ -111,57 +116,63 @@
                       <!-- /.tab-pane -->
 
                       <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
+                      {{ Form::open(['route' => ['persons.update', $person->id], 'method' => 'put', 'files' => true, 'class' => 'form-horizontal clearfix' ]) }}
                           <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <label for="inputName" class="col-sm-2 control-label">Имя</label>
 
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $person->name }}">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                              <label for="inputName" class="col-sm-2 control-label">Имя EN</label>
 
-                            <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
-
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                            <div class="col-sm-10">
-                              <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                              <div class="checkbox">
-                                <label>
-                                  <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                </label>
+                              <div class="col-sm-10">
+                                  <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $person->name_original }}">
                               </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label">Профессии</label>
+
+                            <div class="col-sm-10">
+                                {{Form::select('carers[]',
+                                        $carers,
+                                        $selectedCarers,
+                                        ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Профессии', 'style' => 'width: 100%;'])
+                                }}
+                            </div>
+                          </div>
+
+
+                          <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">День рождения</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control pull-right"  value="{{ $person->date }}" name="date">
                             </div>
                           </div>
                           <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                              <button type="submit" class="btn btn-danger">Submit</button>
+                            <label for="inputExperience" class="col-sm-2 control-label">Место рождения</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control pull-right"  value="{{ $person->birthplace }}" name="birthplace">
                             </div>
                           </div>
-                        </form>
+                          <div class="form-group">
+                            <label for="inputSkills" class="col-sm-2 control-label">Рост</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control pull-right"  value="{{ $person->stature }}" name="stature">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="{{ route('persons.index') }} " class="btn btn-danger">Выйти</a>
+                                <button type="submit" name="action" value="saveView" class="btn btn-default ">Сохранить</button>
+                            </div>
+                          </div>
+                        {{ Form::close() }}
                       </div>
                       <!-- /.tab-pane -->
                     </div>

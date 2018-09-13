@@ -6,6 +6,7 @@ use App\Person;
 use App\Carer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PersonsController extends Controller
 {
@@ -47,7 +48,10 @@ class PersonsController extends Controller
     public function show($slug)
     {
         $person = Person::where('slug', $slug)->firstOrFail();
-        return view('admin.persons.show', compact('person'));
+        $carers = Carer::pluck('title', 'id');
+        $selectedCarers = $person->carers->pluck('id')->all();
+
+        return view('admin.persons.show', compact('person', 'selectedCarers', 'carers'));
     }
 
 
@@ -65,7 +69,7 @@ class PersonsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
+            'image' => 'image'
 
         ]);
 
@@ -76,13 +80,9 @@ class PersonsController extends Controller
 
 
         if ($request->get('action') == 'save'){
-
             return redirect()->route('persons.index');
-
         } elseif ($request->get('action') == 'saveView') {
-
-            return redirect()->route('persons.show', $person->slug);
-
+            return redirect()->route('persons.show', $person->id);
         }
 
         return redirect()->route('persons.index');

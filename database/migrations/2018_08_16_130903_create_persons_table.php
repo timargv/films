@@ -15,10 +15,13 @@ class CreatePersonsTable extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');                 // Полное Имя Актера
-            $table->string('image')->nullable();    // Аватар Актера
-            $table->date('date')->nullable();   // День рождение
-            $table->string('slug');
+            $table->string('name')->nullable();                 // Полное Имя Актера
+            $table->string('name_original')->nullable();        // Полное Имя Актера
+            $table->string('image')->nullable();                // Аватар Актера
+            $table->string('stature')->nullable();              // Рост
+            $table->string('birthplace')->nullable();           // Место рождения
+            $table->string('date')->nullable();                 // День рождение
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

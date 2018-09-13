@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Carer;
+use App\Person;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CarersController extends Controller
 {
@@ -34,7 +37,9 @@ class CarersController extends Controller
     public function show($slug)
     {
         $carer = Carer::where('slug', $slug)->firstOrFail();
-        return view('admin.carers.show', compact('carer'));
+        $persons = $carer->persons()->paginate(15);
+
+        return view('admin.carers.show', compact('carer', 'persons'));
     }
  
 
@@ -56,5 +61,13 @@ class CarersController extends Controller
         return back();
     }
 
+    public  function export() {
+        $carer = Carer::select('id', 'title')->get();
+        return Excel::create('Экспорт Carer', function ($excel) use($carer) {
+            $excel->sheet('mysheet', function ($sheet) use ($carer) {
+                $sheet->fromArray($carer);
+            });
+        })->export('xlsx');
+    }
 
 }

@@ -23,6 +23,7 @@
 
                     <div class="pull-left">
                         <a class="btn btn-primary btn-sm" href="{{ route('carers.create') }}"><i class="fa fa-plus"></i> &nbsp; Добавить</a>
+                        <a class="btn btn-default btn-sm" href="{{ route('carers.export') }}"><i class="fa fa-download"></i> &nbsp; Export</a>
                     </div>
 
                     {{ Form::open(['route' => 'carers.store', 'class' => 'form-inline ']) }}

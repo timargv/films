@@ -7,6 +7,7 @@ use App\Film;
 use App\Genre;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GenresController extends Controller
 {
@@ -105,5 +106,15 @@ class GenresController extends Controller
         //
         Genre::findOrFail($id)->remove();
         return back();
+    }
+
+
+    public  function export() {
+        $genre = Genre::select('id', 'title')->get();
+        return Excel::create('Экспорт Genre', function ($excel) use($genre) {
+            $excel->sheet('mysheet', function ($sheet) use ($genre) {
+                $sheet->fromArray($genre);
+            });
+        })->export('xlsx');
     }
 }

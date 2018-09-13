@@ -16,6 +16,7 @@ class CarerTableSeeder extends Seeder
         // factory(\App\Carer::class, 7)->create();
 
         Carer::create(['title' => 'Актер']);
+        Carer::create(['title' => 'Актриса']);
         Carer::create(['title' => 'Режиссер']);
         Carer::create(['title' => 'Сценарист']);
         Carer::create(['title' => 'Продюсер']);

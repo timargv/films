@@ -7,16 +7,16 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Редактирование Персонажа
-                <small>приятные слова..</small>
+                Редактирование {{ $person->name }}
+                <small>{{ $person->name_original }}</small>
             </h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
-            {{ Form::open(['route' => ['persons.update', $person->id], 'method' => 'put', 'files' => true ]) }}
+            {{ Form::open(['route' => ['persons.update', $person->id], 'method' => 'put', 'files' => true, 'class' => 'form-horizontal' ]) }}
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
 
                     <!-- Profile Image -->
                     <div class="box box-primary">
@@ -40,46 +40,73 @@
 
                     <!-- Profile Image -->
                     <div class="box box-primary">
-                        <div class="box-body box-profile">
+                        <div class="box-header with-border">
+                            Редактирование - {{ $person->name }}
+                        </div>
+                        <div class="box-body box-profile ">
 
-                            <ul class="list-group list-group-unbordered">
-                                <li style="border-top: 0" class="list-group-item clearfix">
-                                    <div class="form-group">
-                                        <label>Имя</label>
-                                        <div class="input-group ">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                            <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $person->name }}">
-                                        </div>
-                                </li>
-                                <li class="list-group-item clearfix">
-                                    <div class="form-group">
-                                        <label>Профессии</label>
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">Имя</label>
+
+                                    <div class="col-sm-10">
+                                        <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $person->name }}">
+                                    </div>
+                                </div>
+
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Имя EN</label>
+
+                                <div class="col-sm-10">
+                                    <input name="name" type="text" class="form-control" placeholder="Иван" value="{{ $person->name_original }}">
+                                </div>
+                            </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-sm-2 control-label">Профессии</label>
+
+                                    <div class="col-sm-10">
                                         {{Form::select('carers[]',
-                                          $carers,
-                                          $selectedCarers,
-                                          ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Профессии'])
+                                                $carers,
+                                                $selectedCarers,
+                                                ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Профессии', 'style' => 'width: 100%;'])
                                         }}
                                     </div>
-                                </li>
-                                <li style="border-bottom: 0" class="list-group-item clearfix">
-                                    <div class="form-group">
-                                        <label>День рождения </label>
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right" id="datepicker" value="{{ $person->date }}" name="date">
-                                        </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label">День рождения</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control pull-right"  value="{{ $person->date }}" name="date">
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputExperience" class="col-sm-2 control-label">Место рождения</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control pull-right"  value="{{ $person->birthplace }}" name="birthplace">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputSkills" class="col-sm-2 control-label">Рост</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control pull-right"  value="{{ $person->stature }}" name="stature">
+                                    </div>
+                                </div>
 
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">
-                            <a href="{{ route('persons.index') }} " class="btn btn-danger">Выйти</a>
-                            <button  class="btn btn-primary">Сохранить</button>
-                            <button type="submit" name="action" value="saveView" class="btn btn-default ">Сохранить и Посмотреть</button>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <a href="{{ route('persons.index') }} " class="btn btn-danger">Выйти</a>
+                                    <button  class="btn btn-primary">Сохранить</button>
+                                    <button type="submit" name="action" value="saveView" class="btn btn-default ">Сохранить и Посмотреть</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box -->

@@ -25,17 +25,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::resource('carers', 'CarersController');
       Route::resource('thematics', 'ThematicsController');
 
+      Route::get('films/find', 'FilmsController@find')->name('films.find');
+      Route::post('films/import', 'FilmsController@import')->name('films.import');
 
-
-    Route::get('films/find', 'FilmsController@find')->name('films.find');
 
     Route::get('films-export', 'FilmsController@export')->name('films.export');
-    Route::post('films/import', 'FilmsController@import')->name('films.import');
-
-
     Route::get('years-export', 'YearsController@export')->name('years.export');
     Route::get('countries-export', 'CountriesController@export')->name('countries.export');
     Route::get('persons-export', 'PersonsController@export')->name('persons.export');
+    Route::get('genres-export', 'GenresController@export')->name('genres.export');
+    Route::get('carers-export', 'CarersController@export')->name('carers.export');
+
 
 
 });

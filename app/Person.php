@@ -19,10 +19,8 @@ class Person extends Model
 {
 
     use Sluggable;
-
     protected $table = 'persons';
-    protected $fillable = ['name', 'slug'];
-
+    protected $fillable = ['name', 'name_original', 'stature', 'stature', 'birthplace', 'date', 'slug'];
 
     //-------------------
     public function films () {
@@ -43,6 +41,15 @@ class Person extends Model
             'person_carers',
             'person_id',
             'carer_id'
+        );
+    }
+
+    public function genres () {
+        return $this->belongsToMany(
+            Genre::class,
+            'person_genres',
+            'person_id',
+            'genre_id'
         );
     }
 
@@ -146,28 +153,28 @@ class Person extends Model
 
 
     //------------------- DATE
-    public function setDateAttribute($value)
-    {
-        if (strlen($value)) {
-            $date = Date::createFromFormat('d/m/y', $value)->format('Y-m-d');
-            $this->attributes['date'] = $date;
-        }   $this->attributes['date'] = null;
-    }
+//    public function setDateAttribute($value)
+//    {
+//        if (strlen($value)) {
+//            $date = Date::createFromFormat('d/m/y', $value)->format('Y-m-d');
+//            $this->attributes['date'] = $date;
+//        }   $this->attributes['date'] = null;
+//    }
+//
+//    public function getDateAttribute($value)
+//    {
+//        Date::setLocale('ru');
+//        if (strlen($value)) {
+//            $date = Date::createFromFormat('Y-m-d', $value)->format('d/m/y');
+//            return $date;
+//        }   return null;
+//    }
 
-    public function getDateAttribute($value)
-    {
-        Date::setLocale('ru');
-        if (strlen($value)) {
-            $date = Date::createFromFormat('Y-m-d', $value)->format('d/m/y');
-            return $date;
-        }   return null;
-    }
-
-    public function getDate()
-    {
-        if (strlen($this->date)) {
-            return Date::createFromFormat('d/m/y', $this->date)->format('F d, Y' );
-        }   return null;
-    }
+//    public function getDate()
+//    {
+//        if (strlen($this->date)) {
+//            return Date::createFromFormat('d/m/y', $this->date)->format('F d, Y' );
+//        }   return null;
+//    }
  
 }

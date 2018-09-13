@@ -20,6 +20,15 @@ class Genre extends Model
         );
     }
 
+    public function persons () {
+        return $this->belongsToMany(
+            Person::class,
+            'person_genres',
+            'genre_id',
+            'person_id'
+        );
+    }
+
     //-------------------
     public function sluggable()
     {
