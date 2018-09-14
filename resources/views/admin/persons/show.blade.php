@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                {{ $person->name }}
+                {{ $person->name }} - <a target="_blank" href="https://www.kinopoisk.ru/name/{{ $person->id }}/">KP</a>
                 <small>приятные слова..</small>
             </h1>
         </section>

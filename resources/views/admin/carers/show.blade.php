@@ -28,7 +28,7 @@
                             <th style="width: 50px;padding-left: 15px;">ID</th>
                             <th style="width: 150px;">Картинка</th>                            
                             <th>Имя</th>
-                            <th>Профессии</th>
+                            <th></th>
 
                             <th></th>
                         </tr>

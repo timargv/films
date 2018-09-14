@@ -40,7 +40,7 @@
                         </tr>
                         @foreach($persons as $person)
                             <tr>
-                                <td style="padding-left: 15px;">{{ $person->id }}</td>
+                                <td style="padding-left: 15px;"><a target="_blank" href="https://www.kinopoisk.ru/name/{{ $person->id }}/">{{ $person->id }}</a></td>
                                 <td><img class="" src="{{ $person->getImage('original', '') }}" style="height: 80px;"></td>
                                 <td><a href="{{ route('persons.show', $person->slug)}}">{{ $person->name }}</a>
                                     <div class="clearfix " style="max-width: 250px; font-size: 13px; margin-top: 5px;">
