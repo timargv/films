@@ -37,5 +37,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::get('carers-export', 'CarersController@export')->name('carers.export');
 
 
+    Route::get('persons/search','SearchDataController@result')->name('persons.search');
 
 });

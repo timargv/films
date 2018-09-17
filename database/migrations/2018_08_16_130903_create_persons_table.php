@@ -24,6 +24,8 @@ class CreatePersonsTable extends Migration
             $table->string('slug')->nullable();
             $table->timestamps();
         });
+
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE persons ADD FULLTEXT search(name, name_original)');
     }
 
     /**

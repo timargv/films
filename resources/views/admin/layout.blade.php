@@ -428,56 +428,10 @@
 <!-- ./wrapper -->
 
 
+
 <script src="/js/admin.js"></script>
-
-{{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>--}}
-
-<script type="text/javascript">
-//    $('').select2({
-//        placeholder: "Choose tags...",
-//        minimumInputLength: 2,
-//        ajax: {
-//            url: '/films/create/find',
-//            dataType: 'json',
-//            data: function (params) {
-//                return {
-//                    q: $.trim(params.term)
-//                };
-//            },
-//            processResults: function (data) {
-//                return {
-//                    results: data
-//                };
-//            },
-//            cache: true
-//        }
-//    });
-
-    $('#tag_list').select2({
-        placeholder: 'Select an item',
-        ajax: {
-            url: '/admin/films/find',
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results:  $.map(data, function (item) {
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
-
-</script>
+ 
 {{--<script type="text/javascript" async src="//moonwalk.co/player_api?trailer=1&trailer_width=575&trailer_height=315"></script>--}}
 
 </body>
-
-<!-- Mirrored from almsaeedstudio.com/themes/AdminLTE/pages/examples/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 18 Dec 2016 15:13:35 GMT -->
 </html>
