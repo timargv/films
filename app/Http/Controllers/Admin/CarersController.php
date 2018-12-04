@@ -53,6 +53,14 @@ class CarersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'title' => 'required'
+        ]);
+
+        $carer = Carer::find($id);
+        $carer->update($request->all());
+        
+        return redirect()->route('carers.index');
     }
 
     public function destroy($id)

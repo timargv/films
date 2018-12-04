@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Elasticquent\ElasticquentTrait;
 
 
 /**
@@ -19,8 +20,21 @@ class Person extends Model
 {
 
     use Sluggable;
+    use ElasticquentTrait;
+
     protected $table = 'persons';
-    protected $fillable = ['name', 'name_original', 'stature', 'stature', 'birthplace', 'date', 'slug'];
+    protected $fillable = ['name', 'name_original', 'stature', 'birthplace', 'date', 'slug'];
+
+    protected $mappingProperties = array(
+        'name' => [
+          'type' => 'text',
+          "analyzer" => "standard",
+        ],
+        'name_original' => [
+          'type' => 'text',
+          "analyzer" => "standard",
+        ],
+    );
 
     //-------------------
     public function films () {

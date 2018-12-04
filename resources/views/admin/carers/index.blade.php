@@ -33,7 +33,11 @@
 
                                 <div class="input-group ">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input name="title" type="text" class="form-control" placeholder="Профессия" value="{{ old('title') }}"></div>
+                                    <input name="title" type="text" class="form-control" placeholder="Профессия" value="{{ old('title') }}">  </div>
+                                    
+                                    <div class="input-group ">
+                                    <input name="color" type="text" class="form-control" placeholder="Цвет" value="{{ old('color') }}">
+                                </div>
                             </div>
                             <div class="form-group">
                                     <button  class="btn btn-primary"><i class="fa fa-plus"></i></button>                                
@@ -58,6 +62,7 @@
 
                             <th style="width: 50px;padding-left: 15px;">ID</th>
                             <th>Название</th>
+                            <th>Цвет</th>
 
                             <th></th>
                         </tr>
@@ -66,6 +71,9 @@
 
                                 <td style="padding-left: 15px;">{{ $carer->id }}</td>
                                 <td><a href="{{ route('carers.show', $carer->slug)}}">{{ $carer->title }}</a></td>
+                                <td>
+                                    <div style="width: 60px; height: 20px; background: {{ $carer->color }}; color: #fff;">{{ $carer->color }}</div>
+                                </td>
 
                                 <td width="150px">
                                     <div class="form-inline">

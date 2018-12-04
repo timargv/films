@@ -9,7 +9,7 @@ class Carer extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['title', 'slug'];
+    protected $fillable = ['title', 'color', 'slug'];
 
     public function persons () {
         return $this->belongsToMany(

@@ -84,7 +84,8 @@ class Film extends Model
     // protected $guarded = ['id'];
 
     public function allPers ($person) {
-        $person = Person::pluck('name', 'id')->all();
+        // $person = Person::pluck('name', 'id')->all();
+        $person = Person::get();
         return $person;
     }
 

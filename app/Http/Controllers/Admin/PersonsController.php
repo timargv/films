@@ -8,9 +8,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class PersonsController extends Controller
 {
+
+    public function export(){
+//        (new FastExcel(Person::all()))->download('persons.xlsx', function ($person) {
+//            return [
+//                'Name' => $person->name,
+//                'Name Original' => $person->name_original,
+//                'Stature' => strtoupper($person->stature),
+//            ];
+//        });
+
+        return (new FastExcel(Person::all()))->download('persons.xlsx');
+    }
+   
 
     public function index(Request $request)
     {
@@ -18,12 +32,19 @@ class PersonsController extends Controller
         $q = $request->input('q');
         $max_page = 10;
         if (empty($q)) {
-            $persons = Person::paginate(25);
+            $persons = Person::paginate($max_page);
         } else {
-            $persons = $this->search($q, $max_page);
+            // $persons = $this->search($q, $max_page);
+            // $persons = Person::searchByQuery(['multi_match' => ['name' => $q]])->paginate(10) ;
+             $persons = Person::searchByQuery([
+              'multi_match' => [
+                'query' => $q,
+                'fields' => [ "name", "name_original"]
+              ]
+            ])->paginate($max_page);
         }
-        
-        return view('admin.persons.index', ['include' => 'search.table', 'persons' => $persons])->render();
+
+        return view('admin.persons.index', compact('persons'))->render(); 
     }
 
 
@@ -105,14 +126,16 @@ class PersonsController extends Controller
     }
 
 
-    public  function export() {
-        $person = Person::select('id', 'name')->get();
-        return Excel::create('Экспорт Year', function ($excel) use($person) {
-            $excel->sheet('mysheet', function ($sheet) use ($person) {
-                $sheet->fromArray($person);
-            });
-        })->export('xlsx');
-    }
+    // public  function export() {
+    //     $person = Person::select('id', 'name')->get();
+    //     return Excel::create('Экспорт Year', function ($excel) use($person) {
+    //         $excel->sheet('mysheet', function ($sheet) use ($person) {
+    //             $sheet->fromArray($person);
+    //         });
+    //     })->export('xlsx');
+    // }
+
+
 
 
     public function search($q, $count){
@@ -161,5 +184,14 @@ class PersonsController extends Controller
         $persons = Person::whereRaw("MATCH(name, name_original) AGAINST(? IN BOOLEAN MODE)", // name,email - поля, по которым нужно искать
             $qQeury)->paginate($count) ;
         return $persons;
+    }
+
+
+    public function sear()
+    {
+        # code...
+        $persons = Article::searchByQuery(['match' => ['name' => 'Стив']]);
+        return $persons;
+
     }
 }

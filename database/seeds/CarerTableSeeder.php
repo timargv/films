@@ -16,15 +16,15 @@ class CarerTableSeeder extends Seeder
         //
         // factory(\App\Carer::class, 7)->create();
 
-        Carer::create(['title' => 'Актер']);
-        Carer::create(['title' => 'Актриса']);
-        Carer::create(['title' => 'Режиссер']);
-        Carer::create(['title' => 'Сценарист']);
-        Carer::create(['title' => 'Продюсер']);
-        Carer::create(['title' => 'Оператор']);
-        Carer::create(['title' => 'Композитор']);
-        Carer::create(['title' => 'Художник']);
-        Carer::create(['title' => 'Монтажер']);
+        Carer::create(['title' => 'Актер', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Актриса', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Режиссер', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Сценарист', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Продюсер', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Оператор', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Композитор', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Художник', 'color' => '#3bb33b']);
+        Carer::create(['title' => 'Монтажер', 'color' => '#3bb33b']);
 
 DB::table('person_carers')->insert([ 
         ['person_id' => 42593, 'carer_id' =>5],

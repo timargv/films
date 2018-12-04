@@ -23,22 +23,27 @@
                     </div>
 
                     <div class="pull-right">
- 
+                            
 {{--                         <div class="form-group form-inline">
                             <input type="text" class="form-control" id="search" name="search" placeholder="Поиск Персоны" style="width: 450px">
                         </div>
  --}}
-                        <form class="input-group input-group-md" action="{{route('persons.index')}}" method="GET">
+                        {{-- <form class="input-group input-group-md" action="{{route('persons.index')}}" method="GET">
 
                             <input type="text" name="q" class="form-control pull-right" value="{{ request('q') }}" placeholder="Поиск Компании">
 
-                            {{-- <div class="input-group-btn">
+                            <div class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                 @if(!empty(request('q')))
                                     <a href="{{route('persons.index')}}" class="btn btn-danger"><i class="fa fa-close"></i></a>
                                 @endif
-                            </div> --}}
-                        </form>
+                            </div>
+                        </form> --}}
+
+                        {{ Form::open(['route' => ['persons.index'], 'method' => 'get', 'class' => 'input-group input-group-md']) }}
+                            <input type="text" name="q" class="form-control pull-right" value="{{ request('query') }}" placeholder="Поиск Персоны" style="width: 450px">
+                          {{-- {{ Form::submit('Filter results') }} --}}
+                        {{ Form:: close() }}
                     </div>
 
                 </div>

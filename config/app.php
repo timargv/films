@@ -157,7 +157,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        Elasticquent\ElasticquentServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -223,6 +223,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Date' => Jenssegers\Date\Date::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
 
     ],
 

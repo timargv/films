@@ -1,3 +1,4 @@
+
 $(document).ready(function (){
 	$("#example1").DataTable();
 	$(".select2").select2();
@@ -10,6 +11,10 @@ $(document).ready(function (){
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',
       radioClass: 'iradio_minimal-blue'
+    });
+
+    $(function() {
+        $('#cp2').colorpicker();
     });
 });
 

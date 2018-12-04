@@ -1,5 +1,6 @@
 <?php
 
+use App\Person;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +12,9 @@
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', 'HomeController@index');
+Route::get('/films', 'HomeController@films')->name('films.list');
+Route::get('/persons', 'HomeController@persons')->name('persons.list');
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
@@ -25,8 +28,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
       Route::resource('carers', 'CarersController');
       Route::resource('thematics', 'ThematicsController');
 
-      Route::get('films/find', 'FilmsController@find')->name('films.find');
+      Route::get('/find-films', 'FilmsController@find')->name('films.find');
       Route::post('films/import', 'FilmsController@import')->name('films.import');
+//      Route::post('films/imports', 'FilmsController@imports')->name('films.imports');
 
 
     Route::get('films-export', 'FilmsController@export')->name('films.export');
@@ -37,6 +41,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::get('carers-export', 'CarersController@export')->name('carers.export');
 
 
-    Route::get('persons/search','SearchDataController@result')->name('persons.search');
+
+    Route::get('/sear', function() {
+
+        $persons = Person::searchByQuery(['match' => ['name_original' => 'Stephen Carpenter']]);
+
+        return $persons->chunk(2);
+    });
 
 });

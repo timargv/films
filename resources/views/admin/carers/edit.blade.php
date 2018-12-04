@@ -19,7 +19,7 @@
                 <div class="box-header">
 
                 </div>
-                {{ Form::open(['route' => ['genres.update', $genre->id], 'method' => 'put']) }}
+                {{ Form::open(['route' => ['carers.update', $carer->id], 'method' => 'put']) }}
                 <div class=" box-body ">
 
                     <div class="">
@@ -29,17 +29,21 @@
                             @include('admin.errors')
                             <div class="clearfix row">
                                 <div class="col-xs-6">
-                                    <label>Имя</label>
+                                    <label>Название</label>
                                     <div class="input-group ">
                                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                        <input name="title" type="text" class="form-control" placeholder="Иван" value="{{ $genre->title }}"></div>
+                                        <input name="title" type="text" class="form-control" placeholder="Иван" value="{{ $carer->title }}"></div>
+                                       <br> 
+                                    <div class="input-group ">
+                                        <div id="cp2" class="input-group colorpicker-component">
+                                            <span class="input-group-addon"><i></i></span>
+                                            <input name="color" type="text" value="{{ $carer->color }}" class="form-control" />
+                                        </div>
+                                    </div>
+
                                 </div>
-
-                                
                             </div>
-
                             <br>
-
                         </div>
                     </div>
 

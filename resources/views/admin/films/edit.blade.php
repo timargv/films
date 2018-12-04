@@ -119,119 +119,7 @@
                     </div>
                     <!-- /.box -->
 
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Режиссер</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="form-group">
-                                {{Form::select('directors[]',
-                                  $persons,
-                                  $selectedDirectors,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Режиссера'])
-                                }}
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Сценарист</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="form-group">
-                                {{Form::select('writers[]',
-                                  $persons,
-                                  $selectedWriters,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Сценариста'])
-                                }}
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Оператор</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="form-group">
-                                {{Form::select('operators[]',
-                                  $persons,
-                                  $selectedOperators,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Оператора'])
-                                }}
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Композитор</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="form-group">
-                                {{Form::select('musicians[]',
-                                  $persons,
-                                  $selectedMusicians,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Композитора'])
-                                }}
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Художник</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="form-group">
-                                {{Form::select('artists[]',
-                                  $persons,
-                                  $selectedArtists,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Художника'])
-                                }}
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Монтаж</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="form-group">
-                                {{Form::select('mountings[]',
-                                  $persons,
-                                  $selectedMountings,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Монтажера'])
-                                }}
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
+                    
 
                     <!-- About Me Box -->
                     <div class="box box-primary">
@@ -244,7 +132,7 @@
                                 {{Form::select('relateds[]',
                                   $relateds,
                                   $selectedRelateds,
-                                  ['class' => 'form-control select2', 'multiple'=>'multiple','data-placeholder'=>'Выберите Фильм'])
+                                  ['class' => 'form-control select2', 'id' => 'tag_list', 'multiple'=>'multiple','data-placeholder'=>'Выберите Фильм'])
                                 }}
                             </div>
                         </div>

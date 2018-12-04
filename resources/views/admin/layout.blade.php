@@ -429,8 +429,64 @@
 
 
 
-<script src="/js/admin.js"></script>
+{{-- <script src="/js/admin.js"></script> --}}
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script> --}}
+
+<script type="text/javascript">
  
+// $('#tag_list').select2({
+//         placeholder: 'Select an item',
+//         maximumSelectionLength: 3,
+//         maximumResultsForSearch: 10,
+//         minimumInputLength: 3,
+//         ajax: {
+//           url: '/admin/find-films',
+//           dataType: 'json',
+//           delay: 250,
+//             templateResult: formatState,
+//             templateSelection: formatState,
+//           cache: false
+//         },
+
+//       });
+
+//     function formatState (opt) {
+//         var markup = "<div class='select2-result-repository clearfix'>" +
+//         "<div class='select2-result-repository__avatar'><img src='" + repo.image + "' /></div>" +
+//         "<div class='select2-result-repository__meta'>" +
+//           "<div class='select2-result-repository__title'>" + repo.name + "</div>";
+//           return markup;
+//     };
+    
+
+    $("#tag_list").select2({
+      ajax: {
+        url: "/admin/find-films",
+        delay: 250,
+        dataType: 'json',
+        processResults: processData
+      },
+      data: processData([{ "Id": "4", "image": "JKL", "name": "Juliet Kilo Laugh" }]).results,
+      minimumInputLength: 3,
+      // escapeMarkup: function (m) { return m; } ,
+      // templateSelection: myCustomTemplate
+    });
+
+    function processData(data) {
+      var mapdata = $.map(data, function (obj) {      
+        obj.id = obj.id;
+        obj.text = '[' + obj.id + '] ' + obj.name;
+        return obj;
+      });
+      return { results: mapdata }; 
+    }
+
+
+ </script>
+
 {{--<script type="text/javascript" async src="//moonwalk.co/player_api?trailer=1&trailer_width=575&trailer_height=315"></script>--}}
 
 </body>

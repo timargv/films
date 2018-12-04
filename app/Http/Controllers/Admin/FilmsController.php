@@ -12,17 +12,14 @@ use App\Thematic;
 use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use DB;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class FilmsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
         $films = Film::paginate(15);
@@ -42,28 +39,26 @@ class FilmsController extends Controller
         $years      = Year::pluck('year', 'id')->all();
         $countries  = Country::pluck('country', 'id')->all();
         $relateds   = Related::pluck('title', 'id')->all();
-        $thematics   = Thematic::pluck('title', 'id')->all();
+        $thematics  = Thematic::pluck('title', 'id')->all();
 
         $filmis = new Film();
         $persons = $filmis->allPers($filmis);
 
 
 
-        return view('admin.films.create',  compact('genres',
-            'persons',
-            'countries', 'relateds', 'years', 'thematics'));
+        return view('admin.films.create',  compact('genres', 'persons', 'countries', 'relateds', 'years', 'thematics'));
     }
 
     public function find(Request $request)
     {
-        $data = [];
+         $data = [];
 
         if($request->has('q')){
             $search = $request->q;
             $data = DB::table("persons")
-                ->select("id","name")
-                ->where('name','LIKE',"%$search%")
-                ->get();
+                    ->select("id","name")
+                    ->where('name','LIKE',"%$search%")
+                    ->get();
         }
 
         return response()->json($data);
@@ -272,13 +267,23 @@ class FilmsController extends Controller
             'file' => 'required',
         ]);
         $path = $request->file('file')->getRealPath();
-        $data = Excel::load($path, function($reader) {})->get();
-        if(!empty($data) && $data->count()) {
-            foreach ($data as $key => $value) {
-                $attributes = $value->only('title', 'image', 'time', 'description')->toArray();
-                Film::create($attributes);
-                }
-        }
+//        Excel::filter('chunk')->load($path)->chunk(250, function($results)
+//        {
+//            foreach ($results as $key => $value) {
+//                $attributes = $value->only('title', 'image', 'time', 'description')->toArray();
+//                Film::create($attributes);
+//            }
+//        });
+
+        $collection = (new FastExcel)->import($path);
+
+
+            $collection->filter()->each(function($item) {
+                Film::create([
+                    'title' => $item['title'],
+                ]);
+            });
+
         return redirect()->route('films.index');
     }
 
